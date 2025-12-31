@@ -36,8 +36,11 @@ import { useAdsStore } from '../store/useAdsStore';
 import { trackPageView, trackApiKeySaved, trackSettingChanged, trackDataCleared } from '../services/analyticsService';
 import { useTranslation } from 'react-i18next';
 
+import { useNavigate } from 'react-router-dom';
+
 const SettingsView = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const [openaiKey, setOpenaiKey] = useState(localStorage.getItem('openai_api_key') || '');
     const [saved, setSaved] = useState(false);
     const [activeTab, setActiveTab] = useState(0);
@@ -63,10 +66,9 @@ const SettingsView = () => {
     };
 
     const handleClearData = () => {
-        // Preserve the OpenAI API key
+        // Preserve the OpenAI API key but NOT hasSeenIntro so onboarding shows again
         const apiKey = localStorage.getItem('openai_api_key');
         const termsAccepted = localStorage.getItem('termsAccepted');
-        const hasSeenIntro = localStorage.getItem('hasSeenIntro');
 
         // Reset the store (clears all entities)
         store.setSites([]);
@@ -76,18 +78,22 @@ const SettingsView = () => {
         store.setAds([]);
         store.resetPrompts();
 
-        // Clear localStorage ads-store but preserve key settings
+        // Clear localStorage ads-store
         localStorage.removeItem('ads-store');
+
+        // Explicitly clear onboarding state so the wizard shows again
+        localStorage.removeItem('hasSeenIntro');
 
         // Restore preserved items
         if (apiKey) localStorage.setItem('openai_api_key', apiKey);
         if (termsAccepted) localStorage.setItem('termsAccepted', termsAccepted);
-        if (hasSeenIntro) localStorage.setItem('hasSeenIntro', hasSeenIntro);
 
         setClearDialogOpen(false);
         trackDataCleared();
         setCleared(true);
-        setTimeout(() => setCleared(false), 3000);
+
+        // Redirect to /sites where the intro wizard will likely be triggered
+        navigate('/sites');
     };
 
     return (

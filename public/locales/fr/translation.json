@@ -22,15 +22,15 @@
     "description": "Description",
     "keywords": "Mots-clés",
     "empty_state": {
-      "title": "Aucun site configuré",
-      "description": "Configurez des sites pour fournir un contexte à la génération de contenu par IA.",
-      "feature_1": "Définissez votre identité d'entreprise et vos valeurs fondamentales",
-      "feature_2": "Définissez des valeurs globales de remplacement pour un message cohérent",
-      "feature_3": "Contrôlez l'image de marque par défaut dans toutes les campagnes"
+      "title": "Chargez votre site web",
+      "description": "Entrez l'URL du site web que vous souhaitez promouvoir. DefoAds l'analysera pour générer des campagnes publicitaires pertinentes.",
+      "feature_1": "L'IA analyse votre site pour comprendre votre activité",
+      "feature_2": "Génère automatiquement des mots-clés ciblés et des textes d'annonces",
+      "feature_3": "Assure une cohérence du message sur toutes les campagnes"
     },
     "actions": {
-      "create": "Créer un site",
-      "new": "Nouveau site",
+      "create": "Charger le site",
+      "new": "Charger un site",
       "delete": "Supprimer"
     },
     "counts": {
@@ -383,11 +383,11 @@
     }
   },
   "create_site": {
-    "title": "Nouveau site",
-    "subtitle": "Configurez un site à utiliser pour la génération de contenu par IA",
-    "site_url": "URL du site",
-    "site_url_placeholder": "https://www.microsoft.com",
-    "analyze_with_ai": "Analyser avec l'IA",
+    "title": "Charger un site web",
+    "subtitle": "Entrez l'URL de votre site web pour l'analyser et commencer à créer des campagnes",
+    "site_url": "URL du site web",
+    "site_url_placeholder": "https://www.exemple.com",
+    "analyze_with_ai": "Analyser le site",
     "site_name": "Nom du site",
     "site_name_placeholder": "Par exemple, Ma boutique en ligne",
     "description": "Description",
@@ -399,7 +399,7 @@
       "analysis_failed": "Échec de l'analyse par IA. Veuillez réessayer ou remplir manuellement."
     },
     "actions": {
-      "create": "Créer un site",
+      "create": "Charger le site",
       "cancel": "Annuler"
     }
   },

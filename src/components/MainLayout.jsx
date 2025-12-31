@@ -57,8 +57,8 @@ const navItems = [
     { path: '/sites', label: 'Sites', icon: <SiteIcon />, i18nKey: 'nav.sites' },
     { path: '/campaigns', label: 'Campaigns', icon: <CampaignIcon />, i18nKey: 'nav.campaigns' },
     { path: '/adgroups', label: 'Ad Groups', icon: <AdGroupIcon />, i18nKey: 'nav.adgroups' },
-    { path: '/keywords', label: 'Keywords', icon: <KeywordIcon />, i18nKey: 'nav.keywords' },
     { path: '/ads', label: 'Ads', icon: <AdsIcon />, i18nKey: 'nav.ads' },
+    { path: '/keywords', label: 'Keywords', icon: <KeywordIcon />, i18nKey: 'nav.keywords' },
     { path: '/negative-keywords', label: 'Negative Keywords', icon: <BlockIcon />, i18nKey: 'nav.negative_keywords' },
 
 ];

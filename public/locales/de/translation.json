@@ -22,15 +22,15 @@
     "description": "Beschreibung",
     "keywords": "Schlüsselwörter",
     "empty_state": {
-      "title": "Keine Websites konfiguriert",
-      "description": "Konfigurieren Sie Websites, um Kontext für die KI-Content-Erstellung bereitzustellen.",
-      "feature_1": "Definieren Sie Ihre Unternehmensidentität und Ihre Grundwerte",
-      "feature_2": "Legen Sie globale Standardwerte für konsistente Nachrichtenkommunikation fest",
-      "feature_3": "Steuern Sie die Standard-Branding-Kontrolle für alle Kampagnen"
+      "title": "Website laden",
+      "description": "Geben Sie die URL der Website ein, die Sie bewerben möchten. DefoAds analysiert sie, um relevante Werbekampagnen zu erstellen.",
+      "feature_1": "KI analysiert Ihre Website, um Ihr Unternehmen zu verstehen",
+      "feature_2": "Generiert automatisch zielgerichtete Keywords und Anzeigentexte",
+      "feature_3": "Sorgt für konsistente Botschaften in allen Kampagnen"
     },
     "actions": {
-      "create": "Website erstellen",
-      "new": "Neue Website",
+      "create": "Website laden",
+      "new": "Website laden",
       "delete": "Löschen"
     },
     "counts": {
@@ -383,11 +383,11 @@
     }
   },
   "create_site": {
-    "title": "Neue Website",
-    "subtitle": "Richten Sie eine Website für die KI-Content-Erstellung ein",
+    "title": "Website laden",
+    "subtitle": "Geben Sie die URL Ihrer Website ein, um sie zu analysieren und Kampagnen zu erstellen",
     "site_url": "Website-URL",
-    "site_url_placeholder": "https://www.microsoft.com",
-    "analyze_with_ai": "Mit KI analysieren",
+    "site_url_placeholder": "https://www.beispiel.de",
+    "analyze_with_ai": "Website analysieren",
     "site_name": "Websitename",
     "site_name_placeholder": "z.B. Mein Online-Shop",
     "description": "Beschreibung",
@@ -399,7 +399,7 @@
       "analysis_failed": "KI-Analyse fehlgeschlagen. Bitte versuchen Sie es erneut oder füllen Sie die Daten manuell aus."
     },
     "actions": {
-      "create": "Website erstellen",
+      "create": "Website laden",
       "cancel": "Abbrechen"
     }
   },

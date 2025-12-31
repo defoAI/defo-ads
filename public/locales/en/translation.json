@@ -22,15 +22,15 @@
         "description": "Description",
         "keywords": "Keywords",
         "empty_state": {
-            "title": "No sites configured",
-            "description": "Configure sites to provide context for AI content generation.",
-            "feature_1": "Define your business identity and core values",
-            "feature_2": "Set global fallback values for consistent messaging",
-            "feature_3": "Control default branding across all campaigns"
+            "title": "Load your Website",
+            "description": "Enter the URL of the website you want to promote. DefoAds will analyze it to generate relevant ad campaigns.",
+            "feature_1": "AI analyzes your site to understand your business",
+            "feature_2": "Generates targeted keywords and ad copy automatically",
+            "feature_3": "Ensures consistent messaging across all campaigns"
         },
         "actions": {
-            "create": "Create Site",
-            "new": "New Site",
+            "create": "Load Website",
+            "new": "Load Website",
             "delete": "Delete"
         },
         "counts": {
@@ -383,11 +383,11 @@
         }
     },
     "create_site": {
-        "title": "New Site",
-        "subtitle": "Configure a site to be used for AI content generation",
-        "site_url": "Site URL",
-        "site_url_placeholder": "https://www.microsoft.com",
-        "analyze_with_ai": "Analyze with AI",
+        "title": "Load Website",
+        "subtitle": "Enter the URL of your website to analyze and start creating campaigns",
+        "site_url": "Website URL",
+        "site_url_placeholder": "https://www.example.com",
+        "analyze_with_ai": "Analyze Website",
         "site_name": "Site Name",
         "site_name_placeholder": "e.g., My Online Store",
         "description": "Description",
@@ -399,7 +399,7 @@
             "analysis_failed": "AI Analysis failed. Please try again or fill manually."
         },
         "actions": {
-            "create": "Create Site",
+            "create": "Load Site",
             "cancel": "Cancel"
         }
     },
