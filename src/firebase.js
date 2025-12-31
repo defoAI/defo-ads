@@ -3,7 +3,7 @@
 //
 // Firebase Analytics initialization - only active in production builds
 
-import { initializeApp } from 'firebase/app';
+import { initializeApp, getApps, getApp } from 'firebase/app';
 import { getAnalytics, logEvent as firebaseLogEvent } from 'firebase/analytics';
 
 const firebaseConfig = {
@@ -30,10 +30,10 @@ let analytics = null;
  */
 export const isAnalyticsEnabled = () => {
   const analyticsEnabled = import.meta.env.VITE_ENABLE_ANALYTICS === 'true';
-  const isProduction = import.meta.env.MODE === 'production' || 
-                       import.meta.env.PROD === true ||
-                       import.meta.env.NODE_ENV === 'production';
-  
+  const isProduction = import.meta.env.MODE === 'production' ||
+    import.meta.env.PROD === true ||
+    import.meta.env.NODE_ENV === 'production';
+
   // Only enable in production builds with explicit flag
   return analyticsEnabled && isProduction;
 };
@@ -86,7 +86,15 @@ export const initializeAnalytics = () => {
   }
 
   try {
-    app = initializeApp(firebaseConfig);
+    // Check if Firebase is already initialized (e.g. by Premium wrapper)
+    if (getApps().length > 0) {
+      app = getApp();
+      console.log('[Firebase] Using existing app instance for Analytics');
+    } else {
+      app = initializeApp(firebaseConfig);
+      console.log('[Firebase] Initialized new app instance for Analytics');
+    }
+
     analytics = getAnalytics(app);
     console.log('[Firebase] Analytics initialized successfully');
     return true;
