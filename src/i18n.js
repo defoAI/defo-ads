@@ -17,11 +17,16 @@ i18n
     // init i18next
     // for all options read: https://www.i18next.com/overview/configuration-options
     .init({
-        debug: false, // Set to false to reduce console noise
+        debug: false, // Disable debug for production
         fallbackLng: 'en',
         lng: 'en', // Explicitly set language to 'en'
         returnNull: false, // Return key if translation is missing instead of null
         returnEmptyString: false, // Return key if translation is empty
+        // Preload languages on initialization
+        preload: ['en'],
+        // Load all namespaces on init
+        ns: ['translation'],
+        defaultNS: 'translation',
         interpolation: {
             escapeValue: false, // not needed for react as it escapes by default
         },
@@ -29,7 +34,9 @@ i18n
             loadPath: '/locales/{{lng}}/translation.json',
         },
         react: {
-            useSuspense: false, // Don't use suspense, load synchronously
+            useSuspense: false, // Don't use Suspense - let components handle loading
+            bindI18n: 'languageChanged loaded', // Re-render on language change and when resources are loaded
+            bindI18nStore: 'added removed', // Re-render when resources are added/removed
         },
     });
 

@@ -2,11 +2,11 @@
 
 **Last Updated: December 30, 2025**
 
-By using Defo Google Ads ("the Application"), you agree to the following terms:
+By using DefoAds ("the Application"), you agree to the following terms:
 
 ## 1. Service Description
 
-Defo Google Ads is a free, open-source, local-first tool for managing Google Ads campaigns. All data is stored locally in your browser.
+DefoAds is a free, open-source, local-first tool for managing Google Ads campaigns. All data is stored locally in your browser.
 
 ## 2. Data & Privacy
 
@@ -33,7 +33,7 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMA
 
 ## 6. Open Source
 
-This project is open source and available on [GitHub](https://github.com/defoai/defo-google-ads). Contributions are welcome.
+This project is open source and available on [GitHub](https://github.com/defoai/defo-ads). Contributions are welcome.
 
 ## 7. Changes to Terms
 

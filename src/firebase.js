@@ -23,9 +23,19 @@ let analytics = null;
 
 /**
  * Check if analytics should be enabled (production build only)
+ * Only enabled when:
+ * 1. VITE_ENABLE_ANALYTICS is explicitly set to 'true'
+ * 2. NODE_ENV is 'production' (or mode is 'production')
+ * This ensures Firebase is ONLY active in premium production deployments
  */
 export const isAnalyticsEnabled = () => {
-  return import.meta.env.VITE_ENABLE_ANALYTICS === 'true';
+  const analyticsEnabled = import.meta.env.VITE_ENABLE_ANALYTICS === 'true';
+  const isProduction = import.meta.env.MODE === 'production' || 
+                       import.meta.env.PROD === true ||
+                       import.meta.env.NODE_ENV === 'production';
+  
+  // Only enable in production builds with explicit flag
+  return analyticsEnabled && isProduction;
 };
 
 /**
@@ -54,10 +64,14 @@ export const setConsentPreference = (preference) => {
 
 /**
  * Initialize Firebase Analytics (only if consented and in production)
+ * This function will ONLY initialize Firebase in premium production deployments
  */
 export const initializeAnalytics = () => {
   if (!isAnalyticsEnabled()) {
-    console.log('[Firebase] Analytics disabled - not a production build');
+    // Silently fail - don't log in production to avoid console noise
+    if (import.meta.env.DEV) {
+      console.log('[Firebase] Analytics disabled - not enabled or not production');
+    }
     return false;
   }
 

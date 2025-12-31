@@ -337,7 +337,7 @@ const MainLayout = ({ darkMode, setDarkMode }) => {
                         <IconButton
                             color="inherit"
                             component="a"
-                            href="https://github.com/defoai/defo-google-ads"
+                            href="https://github.com/defoai/defo-ads"
                             target="_blank"
                             rel="noopener noreferrer"
                             sx={{ display: { xs: 'none', sm: 'flex' } }}

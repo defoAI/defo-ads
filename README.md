@@ -32,7 +32,7 @@ Managing Google Ads campaigns shouldn't require expensive software or sending yo
 
 ## 🏗️ Architecture: Local-First, Cloud-Optional
 
-`defo-google-ads` is designed to be privacy-centric and developer-friendly.
+`defo-ads` is designed to be privacy-centric and developer-friendly.
 
 - **🔐 Local-First**: All data is stored in your browser's `localStorage`. No account, no cloud, no tracking.
 - **🛡️ Privacy Core**: Your campaign data never leaves your machine unless you explicitly use AI features (which route directly to OpenAI).
