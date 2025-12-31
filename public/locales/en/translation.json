@@ -1,0 +1,638 @@
+{
+    "app": {
+        "title": "Defo Ads",
+        "dashboard": "Dashboard",
+        "settings": "Settings",
+        "import": "Import",
+        "export": "Export"
+    },
+    "nav": {
+        "sites": "Sites",
+        "campaigns": "Campaigns",
+        "adgroups": "Ad Groups",
+        "keywords": "Keywords",
+        "ads": "Ads",
+        "negative_keywords": "Negative Keywords",
+        "imprint": "Imprint"
+    },
+    "site": {
+        "id": "ID",
+        "name": "Site Name",
+        "url": "URL",
+        "description": "Description",
+        "keywords": "Keywords",
+        "empty_state": {
+            "title": "No sites configured",
+            "description": "Configure sites to provide context for AI content generation.",
+            "feature_1": "Define your business identity and core values",
+            "feature_2": "Set global fallback values for consistent messaging",
+            "feature_3": "Control default branding across all campaigns"
+        },
+        "actions": {
+            "create": "Create Site",
+            "new": "New Site",
+            "delete": "Delete"
+        },
+        "counts": {
+            "site_count": "{{count}} site",
+            "site_count_other": "{{count}} sites"
+        }
+    },
+    "campaign": {
+        "title": "Campaigns",
+        "id": "ID",
+        "name": "Campaign Name",
+        "site": "Site",
+        "type": "Type",
+        "budget": "Budget (€)",
+        "status": "Status",
+        "empty_state": {
+            "title": "No campaigns yet",
+            "description": "Get started by creating your first campaign or importing from CSV.",
+            "feature_1": "Organize ads by objective and budget",
+            "feature_2": "Set daily limits to control spend",
+            "feature_3": "Target specific locations and languages"
+        },
+        "actions": {
+            "create": "Create Campaign",
+            "new": "New Campaign",
+            "delete": "Delete"
+        },
+        "counts": {
+            "campaign_count": "{{count}} campaign",
+            "campaign_count_other": "{{count}} campaigns"
+        }
+    },
+    "adGroup": {
+        "title": "Ad Groups",
+        "id": "ID",
+        "name": "Ad Group Name",
+        "campaign": "Campaign",
+        "max_cpc": "Max CPC",
+        "status": "Status",
+        "type": "Type",
+        "empty_state": {
+            "title": "No Ad Groups found",
+            "description": "Import data from CSV or generate ad groups with AI.",
+            "description_filtered": "This campaign has no ad groups yet.",
+            "feature_1": "Group related ads together for better organization",
+            "feature_2": "Set specific bids at the group level",
+            "feature_3": "Organize keywords by theme or product"
+        },
+        "actions": {
+            "generate": "Generate Ad Groups with AI",
+            "add_ai": "Add with AI"
+        },
+        "counts": {
+            "count": "{{count}} ad group",
+            "count_other": "{{count}} ad groups"
+        }
+    },
+    "keyword": {
+        "title": "Keywords",
+        "id": "ID",
+        "name": "Keyword",
+        "match_type": "Match Type",
+        "ad_group": "Ad Group",
+        "status": "Status",
+        "empty_state": {
+            "title": "No Keywords found",
+            "description": "Import data from CSV or generate keywords with AI.",
+            "description_filtered": "This campaign has no keywords yet.",
+            "feature_1": "Connect your ads with search intents",
+            "feature_2": "Control broad, phrase, and exact matching",
+            "feature_3": "Refine your audience targeting"
+        },
+        "actions": {
+            "generate": "Generate Keywords with AI",
+            "add_ai": "Add with AI"
+        },
+        "counts": {
+            "count": "{{count}} keyword",
+            "count_other": "{{count}} keywords"
+        }
+    },
+    "ad": {
+        "title": "Ads",
+        "id": "ID",
+        "headline_1": "Headline 1",
+        "status": "Status",
+        "empty_state": {
+            "title": "No Ads found",
+            "description": "Import data from CSV or generate ads with AI.",
+            "description_filtered": "This campaign has no ads yet.",
+            "feature_1": "Create responsive search ads that convert",
+            "feature_2": "Test multiple headlines and descriptions automatically",
+            "feature_3": "Optimize for click-through rates"
+        },
+        "actions": {
+            "generate": "Generate Ads with AI",
+            "add_ai": "Add with AI"
+        },
+        "counts": {
+            "count": "{{count}} ad",
+            "count_other": "{{count}} ads"
+        }
+    },
+    "settings": {
+        "title": "Settings",
+        "tabs": {
+            "general": "General",
+            "prompts": "Prompt Config",
+            "imprint": "Imprint"
+        },
+        "api": {
+            "title": "API Configuration",
+            "description": "Configure your API keys for AI-powered features. Keys are stored locally in your browser.",
+            "openai_key_label": "OpenAI API Key",
+            "openai_key_helper": "Your key is stored in localStorage and never sent to our servers.",
+            "save": "Save Settings",
+            "saved": "Settings saved successfully!"
+        },
+        "ai_behavior": {
+            "title": "AI Behavior",
+            "description": "Customize how AI features behave in the application.",
+            "custom_instructions_label": "Ask for custom instructions before AI generation",
+            "custom_instructions_helper": "When enabled, AI features will prompt you for custom instructions before generating content. When disabled, AI will generate immediately with default settings."
+        },
+        "data_management": {
+            "title": "Data Management",
+            "description": "Clear all your campaign data to start fresh. This will delete all sites, campaigns, ad groups, keywords, and ads.",
+            "danger_zone": "Danger Zone",
+            "warning": "This action cannot be undone. Your OpenAI API key will be preserved.",
+            "clear_all": "Clear All Data",
+            "cleared": "All data has been cleared. You're starting fresh!"
+        },
+        "prompts": {
+            "title": "AI Prompt Templates",
+            "description": "Customize the prompts used for AI generation. Use placeholders to inject context."
+        },
+        "dialog": {
+            "clear_title": "Clear All Data?",
+            "clear_description": "This will permanently delete:",
+            "clear_item_sites": "All sites and configurations",
+            "clear_item_campaigns": "All campaigns",
+            "clear_item_adgroups": "All ad groups",
+            "clear_item_keywords": "All keywords",
+            "clear_item_ads": "All ads and sitelinks",
+            "preserved_notice": "Your OpenAI API key and prompt templates will be preserved.",
+            "confirm_clear": "Yes, Clear Everything"
+        }
+    },
+    "common": {
+        "import": "Import",
+        "import_csv": "Import CSV",
+        "delete": "Delete",
+        "cancel": "Cancel",
+        "generate": "Generate",
+        "save": "Save",
+        "unknown": "Unknown",
+        "edit": "Edit",
+        "back": "Back",
+        "next": "Next",
+        "done": "Done",
+        "close": "Close",
+        "apply": "Apply",
+        "select": "Select",
+        "loading": "Loading...",
+        "error": "Error",
+        "success": "Success"
+    },
+    "navigation": {
+        "back_to_campaigns": "Back to Campaigns",
+        "back_to_campaign": "Back to Campaign",
+        "back_to_ads": "Back to Ads",
+        "back_to_list": "Back to List",
+        "back_to_sites": "Back to Sites",
+        "view_on_github": "View on GitHub",
+        "switch_to_light_mode": "Switch to Light Mode",
+        "switch_to_dark_mode": "Switch to Dark Mode",
+        "select_language": "Select Language"
+    },
+    "tabs": {
+        "general": "General",
+        "ad_groups": "Ad Groups",
+        "keywords": "Keywords",
+        "ads": "Ads",
+        "json": "JSON",
+        "edit": "Edit",
+        "preview": "Preview",
+        "sitelinks": "Sitelinks",
+        "landing_pages": "Landing Pages",
+        "ad_review": "Ad Review",
+        "translate": "Translate"
+    },
+    "campaign_detail": {
+        "title": "Campaign Details",
+        "networks": "Networks",
+        "languages": "Languages",
+        "fields": {
+            "campaign_name": "Campaign Name",
+            "budget": "Budget (€)",
+            "status": "Status",
+            "networks": "Networks",
+            "languages": "Languages"
+        }
+    },
+    "ad_group_detail": {
+        "title": "Ad Group Details"
+    },
+    "ad_detail": {
+        "not_found": "Ad not found",
+        "save_changes": "Save Changes",
+        "headlines": "Headlines",
+        "descriptions": "Descriptions",
+        "settings": "Settings",
+        "ad_group": "Ad Group",
+        "final_url": "Final URL",
+        "headline_max": "(max 30 characters each)",
+        "description_max": "(max 90 characters each)",
+        "fields": {
+            "headline": "Headline {{num}}",
+            "description": "Description {{num}}",
+            "ad_group": "Ad Group",
+            "status": "Status",
+            "final_url": "Final URL"
+        },
+        "status": {
+            "enabled": "Enabled",
+            "paused": "Paused"
+        },
+        "messages": {
+            "saved": "Ad saved successfully!",
+            "translation_applied": "Translation applied! Don't forget to save.",
+            "translation_failed": "Translation failed. Please try again.",
+            "sitelinks_loaded": "Sitelinks loaded from site configuration!",
+            "sitelinks_generated": "Sitelinks generated! Review and save.",
+            "sitelinks_failed": "Failed to generate sitelinks. Please try again.",
+            "landing_pages_generated": "Landing pages generated! Review and save.",
+            "landing_pages_failed": "Failed to generate landing pages. Please try again.",
+            "review_failed": "Failed to review ad. Please try again.",
+            "improvement_applied": "Improvement applied for \"{{category}}\"! Review the changes and save.",
+            "improvement_failed": "Failed to apply improvement. Please try again."
+        }
+    },
+    "site_detail": {
+        "not_found": "Site not found",
+        "edit_site": "Edit Site",
+        "site_name": "Site Name",
+        "site_url": "Site URL",
+        "description": "Description",
+        "seo_keywords": "SEO Keywords",
+        "analyze_with_ai": "Analyze with AI",
+        "analyze_with_ai_helper": "Used as context for AI ad generation.",
+        "seo_keywords_helper": "Comma-separated list of focus keywords.",
+        "messages": {
+            "updated": "Site updated successfully",
+            "name_required": "Site Name is required",
+            "url_required": "Please enter a URL first.",
+            "analysis_failed": "AI Analysis failed. Please check the API key settings or try again.",
+            "analysis_success": "AI Analysis completed successfully!"
+        }
+    },
+    "entity_list": {
+        "delete_confirm": "Delete {{count}} {{type}}?",
+        "delete_items_confirm": "Delete {{count}} items?",
+        "status": "Status",
+        "columns": {
+            "id": "ID",
+            "ad_group_name": "Ad Group Name",
+            "campaign": "Campaign",
+            "max_cpc": "Max CPC",
+            "keyword": "Keyword",
+            "match_type": "Match Type",
+            "ad_group": "Ad Group",
+            "headline_1": "Headline 1"
+        },
+        "dialog": {
+            "generate_title": "Generate {{type}} with AI",
+            "select_parent": "Select the parent entity and provide optional instructions.",
+            "campaign": "Campaign",
+            "ad_group": "Ad Group",
+            "select_campaign": "Please select a campaign first.",
+            "select_ad_group": "Please select an ad group first."
+        }
+    },
+    "create_campaign": {
+        "title": "New Campaign",
+        "subtitle": "Launch your next advertising campaign",
+        "steps": {
+            "select_site": "Select Site",
+            "campaign_goals": "Campaign Goals",
+            "review": "Review"
+        },
+        "select_site": {
+            "title": "Select a Site",
+            "description": "Choose the website this campaign will promote. Site context helps AI generate better campaigns.",
+            "no_sites": "You haven't created any sites yet. Create one first to use AI-powered campaign generation.",
+            "go_to_sites": "Go to Sites"
+        },
+        "campaign_goals": {
+            "title": "Campaign Configuration",
+            "description": "Describe your goals and choose what to generate.",
+            "goals_label": "Campaign Goals",
+            "goals_placeholder": "e.g., Drive more sales for summer collection, target young adults in Germany...",
+            "target_language": "Target Language",
+            "what_to_generate": "What should AI generate?",
+            "generate_ad_groups": "Ad Groups (2-3 themed groups)",
+            "generate_keywords": "Keywords (5-10 per ad group)",
+            "generate_ads": "Ads (1-2 per ad group)",
+            "generating": "Generating...",
+            "generating_structure": "Generating campaign structure...",
+            "generate_button": "Generate Complete Campaign"
+        },
+        "review": {
+            "campaign_name": "Campaign Name",
+            "campaign_name_placeholder": "e.g., Summer Sale 2025",
+            "campaign_type": "Campaign Type",
+            "daily_budget": "Daily Budget",
+            "start_status": "Start Status",
+            "launch_now": "Launch Now",
+            "start_paused": "Start Paused",
+            "ai_generated": "AI Generated:",
+            "ad_groups_count": "{{count}} Ad Groups",
+            "keywords_count": "{{count}} Keywords",
+            "ads_count": "{{count}} Ads"
+        },
+        "campaign_types": {
+            "search": "Search",
+            "display": "Display",
+            "video": "Video",
+            "shopping": "Shopping",
+            "performance_max": "PMax"
+        },
+        "campaign_types_desc": {
+            "search": "Text ads on Google Search",
+            "display": "Visual ads across websites",
+            "video": "Video ads on YouTube",
+            "shopping": "Product listings",
+            "performance_max": "AI-optimized across channels"
+        },
+        "messages": {
+            "select_site": "Please select a site to continue.",
+            "enter_goals": "Please describe your campaign goals.",
+            "enter_name": "Please enter a campaign name",
+            "budget_min": "Budget must be at least €1",
+            "generation_failed": "AI Generation failed. Please try again."
+        },
+        "actions": {
+            "create": "Create Campaign",
+            "cancel": "Cancel",
+            "back": "Back",
+            "next": "Next"
+        }
+    },
+    "create_site": {
+        "title": "New Site",
+        "subtitle": "Configure a site to be used for AI content generation",
+        "site_url": "Site URL",
+        "site_url_placeholder": "https://www.microsoft.com",
+        "analyze_with_ai": "Analyze with AI",
+        "site_name": "Site Name",
+        "site_name_placeholder": "e.g., My Online Store",
+        "description": "Description",
+        "description_placeholder": "Brief description of what this site offers...",
+        "seo_keywords": "SEO Keywords (comma separated)",
+        "seo_keywords_placeholder": "e.g. shoes, fashion, summer sale",
+        "messages": {
+            "url_required": "Please enter a URL first.",
+            "analysis_failed": "AI Analysis failed. Please try again or fill manually."
+        },
+        "actions": {
+            "create": "Create Site",
+            "cancel": "Cancel"
+        }
+    },
+    "import": {
+        "title": "Import Google Ads Data",
+        "upload_file": "Upload File",
+        "paste_text": "Paste Text",
+        "select_file": "Select CSV / TSV File",
+        "file_support": "Supports Google Ads Editor export format (CSV/TSV).",
+        "paste_csv": "Paste CSV Data",
+        "paste_placeholder": "Campaign,Ad Group,Keyword,Criterion Type,Status\nMy Campaign,My AdGroup,test keyword,Broad,Enabled",
+        "import_data": "Import Data",
+        "success_title": "Import Successful!",
+        "messages": {
+            "paste_required": "Please paste some CSV data first.",
+            "processing_failed": "Failed to process data. Please check the format.",
+            "parsing_error": "Parsing error: {{error}}"
+        },
+        "stats": {
+            "campaigns": "Campaigns:",
+            "ad_groups": "Ad Groups:",
+            "keywords": "Keywords:",
+            "ads": "Ads:"
+        }
+    },
+    "export": {
+        "title": "Export Data",
+        "format": "Export Format",
+        "csv": "CSV",
+        "csv_desc": "Google Ads Editor compatible",
+        "json": "JSON",
+        "json_desc": "Full data backup",
+        "select_entities": "Select Entities to Export",
+        "select_all": "Select All",
+        "deselect_all": "Deselect All",
+        "export_entities": "Export {{count}} {{entity}}",
+        "export_entity": "Export {{count}} Entity",
+        "success_title": "Export Successful!",
+        "stats": {
+            "sites": "Sites:",
+            "campaigns": "Campaigns:",
+            "ad_groups": "Ad Groups:",
+            "keywords": "Keywords:",
+            "ads": "Ads:"
+        },
+        "messages": {
+            "csv_info": "CSV export creates a file compatible with Google Ads Editor. Sites are exported as a separate file.",
+            "json_info": "JSON export includes all data in a single file for backup and restore purposes.",
+            "downloaded_csv": "Downloaded as CSV file(s)",
+            "downloaded_json": "Downloaded as JSON file"
+        }
+    },
+    "intro_wizard": {
+        "steps": {
+            "welcome": "Welcome",
+            "terms": "Terms",
+            "api_setup": "API Setup",
+            "safety_first": "Safety First"
+        },
+        "welcome": {
+            "title": "Welcome to Defo Ads",
+            "description": "A 100% Free, Private, and Local-First tool for managing your Google Ads campaigns.",
+            "privacy_title": "🔒 Your Data Stays With You",
+            "privacy_description": "We don't store your campaigns, keywords, or API keys on our servers — everything resides locally in your browser."
+        },
+        "terms": {
+            "title": "Terms & Conditions",
+            "description": "Please review and accept our terms before continuing.",
+            "key_points": "Key Points:",
+            "point_1": "All data is stored locally in your browser",
+            "point_2": "We do not collect or transmit your data",
+            "point_3": "AI features use your own OpenAI API key",
+            "point_4": "You are responsible for data backups",
+            "point_5": "The service is provided \"as is\" without warranties",
+            "read_full": "Read full Terms & Conditions",
+            "accept": "I accept the Terms & Conditions"
+        },
+        "api_setup": {
+            "title": "Power Up with AI",
+            "description": "To use the AI generation features, you'll need your own OpenAI API Key.",
+            "openai_key": "OpenAI API Key",
+            "key_placeholder": "sk-...",
+            "key_helper": "Stored locally in your browser. You can skip this and add it later in Settings.",
+            "get_key": "Don't have a key? Get one here."
+        },
+        "safety_first": {
+            "title": "Don't Forget to Backup!",
+            "description": "Since your data is local, if you clear your browser cache, you lose your data.",
+            "warning_title": "⚠️ Recommended Habit",
+            "warning_description": "Use the Export button in the top bar regularly to save a backup of your campaigns."
+        },
+        "actions": {
+            "back": "Back",
+            "next": "Next",
+            "get_started": "Get Started"
+        }
+    },
+    "cookie_consent": {
+        "title": "We value your privacy",
+        "description": "We use cookies to analyze how you use our app and improve your experience. No personal data is collected.",
+        "decline": "Decline",
+        "accept": "Accept"
+    },
+    "ad_translate": {
+        "title": "Translate Ad Copy",
+        "description": "Use AI to translate your ad copy while maintaining character limits and persuasive tone.",
+        "target_language": "Target Language",
+        "translate_button": "Translate with AI",
+        "translation_complete": "Translation complete! Review below and click \"Apply Translation\" to update your ad.",
+        "translated_headlines": "Translated Headlines",
+        "translated_descriptions": "Translated Descriptions",
+        "apply_translation": "Apply Translation"
+    },
+    "ad_sitelinks": {
+        "title": "Sitelinks",
+        "description": "Add up to 4 sitelinks to give users more options to click.",
+        "load_from_site": "Load from Site",
+        "select_site": "Select a site...",
+        "load": "Load",
+        "generate_button": "Generate Sitelinks with AI",
+        "sitelink": "Sitelink {{num}}",
+        "link_text": "Link Text",
+        "url_path": "URL Path",
+        "url_placeholder": "/page",
+        "description_line_1": "Description Line 1",
+        "description_line_2": "Description Line 2",
+        "add_sitelink": "Add Sitelink",
+        "no_sitelinks": "No sitelinks configured. Add manually or generate with AI.",
+        "char_limit_25": "{{count}}/25",
+        "char_limit_35": "{{count}}/35"
+    },
+    "ad_landing_pages": {
+        "title": "Landing Page URLs",
+        "description": "Suggested landing pages for this ad. Use these to test different destinations.",
+        "generate_button": "Generate Landing Pages with AI",
+        "add_landing_page": "Add Landing Page",
+        "url": "URL",
+        "label": "Label",
+        "landing_page": "Landing Page {{num}}",
+        "no_landing_pages": "No landing pages configured. Generate with AI or add manually."
+    },
+    "ad_preview": {
+        "title": "Google Search Ad Preview",
+        "description": "This is an approximation of how your ad may appear in Google Search results."
+    },
+    "negative_keywords": {
+        "title": "Smart Negative Keywords",
+        "subtitle": "Manage global negative lists and detect conflicts with your positive keywords.",
+        "tabs": {
+            "lists": "Lists Manager",
+            "conflicts": "Conflict Detector"
+        },
+        "lists": {
+            "create_list": "Create Custom List",
+            "universal_lists": "Universal Lists",
+            "custom_lists": "Your Custom Lists",
+            "list_name": "List Name",
+            "keywords": "Keywords (one per line)",
+            "applied_to": "Applied To",
+            "all_campaigns": "All Campaigns",
+            "select_campaigns": "Select Campaigns",
+            "no_custom_lists": "No custom lists yet. Create one to block specific terms.",
+            "edit_list": "Edit List",
+            "delete_list": "Delete List"
+        },
+        "conflicts": {
+            "run_check": "Run Conflict Check",
+            "no_conflicts": "✅ No conflicts found! Your negative lists are safe.",
+            "conflicts_found": "⚠️ Found {{count}} potential conflicts.",
+            "conflict_description": "The negative keyword \"{{negative}}\" (from list \"{{list}}\") is blocking your positive keyword \"{{positive}}\" in campaign \"{{campaign}}\".",
+            "fix_action": "Fix",
+            "ignore_action": "Ignore"
+        },
+        "dialog": {
+            "create_title": "Create Negative List",
+            "edit_title": "Edit Negative List",
+            "name_label": "List Name",
+            "keywords_label": "Keywords",
+            "keywords_helper": "Enter one negative keyword per line",
+            "save": "Save List"
+        }
+    },
+    "campaign_keywords": {
+        "select_ad_group": "Select an Ad Group to view keywords."
+    },
+    "campaign_ads": {
+        "description": "Ads for this campaign will be displayed here."
+    },
+    "ad_group_keywords": {
+        "description": "Keywords for this ad group will be displayed here."
+    },
+    "ad_group_ads": {
+        "description": "Ads for this ad group will be displayed here."
+    },
+    "languages": {
+        "en": "English",
+        "de": "German",
+        "fr": "French",
+        "es": "Spanish",
+        "it": "Italian",
+        "pt": "Portuguese",
+        "nl": "Dutch",
+        "pl": "Polish",
+        "ja": "Japanese",
+        "zh": "Chinese",
+        "ko": "Korean"
+    },
+    "confirmations": {
+        "delete_campaigns": "{{count}} campaign(s)?",
+        "delete_sites": "{{count}} site(s)?",
+        "delete_items": "{{count}} items?"
+    },
+    "prompt_editor": {
+        "select_template": "Select Prompt Template",
+        "defaults": "Defaults",
+        "available_placeholders": "Available Placeholders",
+        "save_template": "Save Template",
+        "saved": "Prompt saved successfully!",
+        "reset_confirm": "Reset all prompts to system defaults? This cannot be undone.",
+        "reset_success": "Prompts reset to defaults.",
+        "no_prompts": "No prompts found.",
+        "initialize_defaults": "Initialize Defaults"
+    },
+    "ai_assist": {
+        "api_key_required": "API Key Required",
+        "api_key_description": "To use AI features, you need to add your OpenAI API key. It's stored locally in your browser and never sent to our servers.",
+        "go_to_settings": "Go to Settings",
+        "no_key": "Don't have a key?",
+        "get_key": "Get one from OpenAI",
+        "custom_instructions": "Custom Instructions",
+        "instructions_description": "Add specific details or instructions for the AI to consider."
+    },
+    "placeholder": {
+        "description": "This view will display a list of {{type}}. Import a CSV to populate data."
+    }
+}

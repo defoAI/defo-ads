@@ -1,0 +1,661 @@
+{
+  "app": {
+    "title": "Defo Ads",
+    "dashboard": "Armaturenbrett",
+    "settings": "Einstellungen",
+    "import": "Importieren",
+    "export": "Exportieren"
+  },
+  "nav": {
+    "sites": "Websites",
+    "campaigns": "Kampagnen",
+    "adgroups": "Anzeigengruppen",
+    "keywords": "Schlüsselwörter",
+    "ads": "Anzeigen",
+    "imprint": "Impressum",
+    "negative_keywords": "Negative Schlüsselwörter"
+  },
+  "site": {
+    "id": "ID",
+    "name": "Websitename",
+    "url": "URL",
+    "description": "Beschreibung",
+    "keywords": "Schlüsselwörter",
+    "empty_state": {
+      "title": "Keine Websites konfiguriert",
+      "description": "Konfigurieren Sie Websites, um Kontext für die KI-Content-Erstellung bereitzustellen.",
+      "feature_1": "Definieren Sie Ihre Unternehmensidentität und Ihre Grundwerte",
+      "feature_2": "Legen Sie globale Standardwerte für konsistente Nachrichtenkommunikation fest",
+      "feature_3": "Steuern Sie die Standard-Branding-Kontrolle für alle Kampagnen"
+    },
+    "actions": {
+      "create": "Website erstellen",
+      "new": "Neue Website",
+      "delete": "Löschen"
+    },
+    "counts": {
+      "site_count": "{{count}} Website",
+      "site_count_other": "{{count}} Websites"
+    }
+  },
+  "campaign": {
+    "title": "Kampagnen",
+    "id": "ID",
+    "name": "Kampagnenname",
+    "site": "Website",
+    "type": "Typ",
+    "budget": "Budget (€)",
+    "status": "Status",
+    "empty_state": {
+      "title": "Noch keine Kampagnen",
+      "description": "Beginnen Sie mit der Erstellung Ihrer ersten Kampagne oder dem Import aus einer CSV-Datei.",
+      "feature_1": "Organisieren Sie Anzeigen nach Ziel und Budget",
+      "feature_2": "Legen Sie tägliche Ausgabelimits fest, um die Ausgaben zu kontrollieren",
+      "feature_3": "Zielen Sie auf bestimmte Standorte und Sprachen ab"
+    },
+    "actions": {
+      "create": "Kampagne erstellen",
+      "new": "Neue Kampagne",
+      "delete": "Löschen"
+    },
+    "counts": {
+      "campaign_count": "{{count}} Kampagne",
+      "campaign_count_other": "{{count}} Kampagnen"
+    }
+  },
+  "adGroup": {
+    "title": "Anzeigengruppen",
+    "id": "ID",
+    "name": "Anzeigengruppenname",
+    "campaign": "Kampagne",
+    "max_cpc": "Max CPC",
+    "status": "Status",
+    "type": "Typ",
+    "empty_state": {
+      "title": "Keine Anzeigengruppen gefunden",
+      "description": "Importieren Sie Daten aus einer CSV oder generieren Sie Anzeigengruppen mit KI.",
+      "description_filtered": "Diese Kampagne hat noch keine Anzeigengruppen.",
+      "feature_1": "Gruppieren Sie verwandte Anzeigen für eine bessere Organisation",
+      "feature_2": "Legen Sie spezifische Gebote auf Gruppenebene fest",
+      "feature_3": "Organisieren Sie Schlüsselwörter nach Thema oder Produkt"
+    },
+    "actions": {
+      "generate": "Anzeigengruppen mit KI generieren",
+      "add_ai": "Mit KI hinzufügen"
+    },
+    "counts": {
+      "count": "{{count}} Anzeigengruppe",
+      "count_other": "{{count}} Anzeigengruppen"
+    }
+  },
+  "keyword": {
+    "title": "Schlüsselwörter",
+    "id": "ID",
+    "name": "Schlüsselwort",
+    "match_type": "Übereinstimmungstyp",
+    "ad_group": "Anzeigengruppe",
+    "status": "Status",
+    "empty_state": {
+      "title": "Keine Schlüsselwörter gefunden",
+      "description": "Importieren Sie Daten aus einer CSV oder generieren Sie Schlüsselwörter mit KI.",
+      "description_filtered": "Diese Kampagne hat noch keine Schlüsselwörter.",
+      "feature_1": "Verbinden Sie Ihre Anzeigen mit Suchabsichten",
+      "feature_2": "Kontrollieren Sie breite, Satz- und genaue Übereinstimmung",
+      "feature_3": "Verfeinern Sie Ihre Zielgruppenausrichtung"
+    },
+    "actions": {
+      "generate": "Schlüsselwörter mit KI generieren",
+      "add_ai": "Mit KI hinzufügen"
+    },
+    "counts": {
+      "count": "{{count}} Schlüsselwort",
+      "count_other": "{{count}} Schlüsselwörter"
+    }
+  },
+  "ad": {
+    "title": "Anzeigen",
+    "id": "ID",
+    "headline_1": "Überschrift 1",
+    "status": "Status",
+    "empty_state": {
+      "title": "Keine Anzeigen gefunden",
+      "description": "Importieren Sie Daten aus einer CSV oder generieren Sie Anzeigen mit KI.",
+      "description_filtered": "Diese Kampagne hat noch keine Anzeigen.",
+      "feature_1": "Erstellen Sie responsive Suchanzeigen, die konvertieren",
+      "feature_2": "Testen Sie automatisch mehrere Überschriften und Beschreibungen",
+      "feature_3": "Optimieren Sie die CTR (Click-Through-Rate)"
+    },
+    "actions": {
+      "generate": "Anzeigen mit KI generieren",
+      "add_ai": "Mit KI hinzufügen"
+    },
+    "counts": {
+      "count": "{{count}} Anzeige",
+      "count_other": "{{count}} Anzeigen"
+    }
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "tabs": {
+      "general": "Allgemein",
+      "prompts": "Eingabeaufforderungs-Konfiguration",
+      "imprint": "Impressum"
+    },
+    "api": {
+      "title": "API-Konfiguration",
+      "description": "Konfigurieren Sie Ihre API-Schlüssel für KI-gestützte Funktionen. Die Schlüssel werden lokal im Browser gespeichert.",
+      "openai_key_label": "OpenAI-API-Schlüssel",
+      "openai_key_helper": "Ihr Schlüssel wird in localStorage gespeichert und niemals an unsere Server gesendet.",
+      "save": "Einstellungen speichern",
+      "saved": "Einstellungen erfolgreich gespeichert!"
+    },
+    "ai_behavior": {
+      "title": "KI-Verhalten",
+      "description": "Passen Sie an, wie sich KI-Funktionen in der Anwendung verhalten.",
+      "custom_instructions_label": "Fragen Sie nach benutzerdefinierten Anweisungen vor der KI-Generierung",
+      "custom_instructions_helper": "Wenn aktiviert, werden Sie von KI-Funktionen vor der Inhaltserstellung nach benutzerdefinierten Anweisungen gefragt. Wenn deaktiviert, wird die KI sofort mit Standardeinstellungen generieren."
+    },
+    "data_management": {
+      "title": "Datenverwaltung",
+      "description": "Löschen Sie alle Ihre Kampagnendaten, um neu zu beginnen. Dies löscht alle Websites, Kampagnen, Anzeigengruppen, Schlüsselwörter und Anzeigen.",
+      "danger_zone": "Gefahrenzone",
+      "warning": "Diese Aktion kann nicht rückgängig gemacht werden. Ihr OpenAI-API-Schlüssel wird erhalten bleiben.",
+      "clear_all": "Alle Daten löschen",
+      "cleared": "Alle Daten wurden gelöscht. Sie beginnen neu!"
+    },
+    "prompts": {
+      "title": "KI-Eingabeaufforderungsvorlagen",
+      "description": "Passen Sie die für die KI-Generierung verwendeten Eingabeaufforderungen an. Nutzen Sie Platzhalter, um Kontext einzufügen."
+    },
+    "dialog": {
+      "clear_title": "Alle Daten löschen?",
+      "clear_description": "Dies wird dauerhaft löschen:",
+      "clear_item_sites": "Alle Websites und Konfigurationen",
+      "clear_item_campaigns": "Alle Kampagnen",
+      "clear_item_adgroups": "Alle Anzeigengruppen",
+      "clear_item_keywords": "Alle Schlüsselwörter",
+      "clear_item_ads": "Alle Anzeigen und Sitelinks",
+      "preserved_notice": "Ihr OpenAI-API-Schlüssel und die Eingabeaufforderungsvorlagen bleiben erhalten.",
+      "confirm_clear": "Ja, alles löschen"
+    }
+  },
+  "common": {
+    "import": "Importieren",
+    "import_csv": "CSV importieren",
+    "delete": "Löschen",
+    "cancel": "Abbrechen",
+    "generate": "Generieren",
+    "save": "Speichern",
+    "unknown": "Unbekannt",
+    "edit": "Bearbeiten",
+    "back": "Zurück",
+    "next": "Weiter",
+    "done": "Fertig",
+    "close": "Schließen",
+    "apply": "Anwenden",
+    "select": "Auswählen",
+    "loading": "Wird geladen...",
+    "error": "Fehler",
+    "success": "Erfolg"
+  },
+  "navigation": {
+    "back_to_campaigns": "Zurück zu den Kampagnen",
+    "back_to_campaign": "Zurück zur Kampagne",
+    "back_to_ads": "Zurück zu den Anzeigen",
+    "back_to_list": "Zurück zur Liste",
+    "back_to_sites": "Zurück zu den Websites",
+    "view_on_github": "Auf GitHub ansehen",
+    "switch_to_light_mode": "Zum hellen Modus wechseln",
+    "switch_to_dark_mode": "Zum dunklen Modus wechseln",
+    "select_language": "Sprache auswählen"
+  },
+  "tabs": {
+    "general": "Allgemein",
+    "ad_groups": "Anzeigengruppen",
+    "keywords": "Schlüsselwörter",
+    "ads": "Anzeigen",
+    "json": "JSON",
+    "edit": "Bearbeiten",
+    "preview": "Vorschau",
+    "sitelinks": "Sitelinks",
+    "landing_pages": "Landingpages",
+    "ad_review": "Anzeigenbewertung",
+    "translate": "Übersetzen"
+  },
+  "campaign_detail": {
+    "title": "Kampagnendetails",
+    "networks": "Netzwerke",
+    "languages": "Sprachen",
+    "fields": {
+      "campaign_name": "Kampagnenname",
+      "budget": "Budget (€)",
+      "status": "Status",
+      "networks": "Netzwerke",
+      "languages": "Sprachen"
+    }
+  },
+  "ad_group_detail": {
+    "title": "Details zur Anzeigengruppe"
+  },
+  "ad_detail": {
+    "not_found": "Anzeige nicht gefunden",
+    "save_changes": "Änderungen speichern",
+    "headlines": "Überschriften",
+    "descriptions": "Beschreibungen",
+    "settings": "Einstellungen",
+    "ad_group": "Anzeigengruppe",
+    "final_url": "Endgültige URL",
+    "headline_max": "(max. 30 Zeichen pro Überschrift)",
+    "description_max": "(max. 90 Zeichen pro Beschreibung)",
+    "fields": {
+      "headline": "Überschrift {{num}}",
+      "description": "Beschreibung {{num}}",
+      "ad_group": "Anzeigengruppe",
+      "status": "Status",
+      "final_url": "Endgültige URL"
+    },
+    "status": {
+      "enabled": "Aktiviert",
+      "paused": "Pausiert"
+    },
+    "messages": {
+      "saved": "Anzeige erfolgreich gespeichert!",
+      "translation_applied": "Übersetzung angewendet! Vergessen Sie nicht zu speichern.",
+      "translation_failed": "Übersetzung fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "sitelinks_loaded": "Sitelinks aus der Website-Konfiguration geladen!",
+      "sitelinks_generated": "Sitelinks generiert! Überprüfen und speichern.",
+      "sitelinks_failed": "Erzeugen von Sitelinks fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "landing_pages_generated": "Landingpages generiert! Überprüfen und speichern.",
+      "landing_pages_failed": "Erzeugen von Landingpages fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "review_failed": "Überprüfung der Anzeige fehlgeschlagen. Bitte versuchen Sie es erneut.",
+      "improvement_applied": "Verbesserung für \"{{category}}\" angewendet! Überprüfen Sie die Änderungen und speichern Sie.",
+      "improvement_failed": "Anwendung der Verbesserung fehlgeschlagen. Bitte versuchen Sie es erneut."
+    }
+  },
+  "site_detail": {
+    "not_found": "Website nicht gefunden",
+    "edit_site": "Website bearbeiten",
+    "site_name": "Websitename",
+    "site_url": "Website-URL",
+    "description": "Beschreibung",
+    "seo_keywords": "SEO-Schlüsselwörter",
+    "analyze_with_ai": "Mit KI analysieren",
+    "analyze_with_ai_helper": "Wird als Kontext für KI-Anzeigenerstellung verwendet.",
+    "seo_keywords_helper": "Kommagetrennte Liste von Fokus-Schlüsselwörtern.",
+    "messages": {
+      "updated": "Website erfolgreich aktualisiert",
+      "name_required": "Websitename erforderlich",
+      "url_required": "Bitte geben Sie zuerst eine URL ein.",
+      "analysis_failed": "KI-Analyse fehlgeschlagen. Bitte überprüfen Sie die API-Schlüsseleinstellungen oder versuchen Sie es erneut.",
+      "analysis_success": "KI-Analyse erfolgreich abgeschlossen!"
+    }
+  },
+  "entity_list": {
+    "delete_confirm": "{{count}} {{type}} löschen?",
+    "delete_items_confirm": "{{count}} Elemente löschen?",
+    "status": "Status",
+    "columns": {
+      "id": "ID",
+      "ad_group_name": "Anzeigengruppenname",
+      "campaign": "Kampagne",
+      "max_cpc": "Max CPC",
+      "keyword": "Schlüsselwort",
+      "match_type": "Übereinstimmungstyp",
+      "ad_group": "Anzeigengruppe",
+      "headline_1": "Überschrift 1"
+    },
+    "dialog": {
+      "generate_title": "{{type}} mit KI generieren",
+      "select_parent": "Wählen Sie die übergeordnete Entität aus und geben Sie optionale Anweisungen an.",
+      "campaign": "Kampagne",
+      "ad_group": "Anzeigengruppe",
+      "select_campaign": "Bitte wählen Sie zuerst eine Kampagne aus.",
+      "select_ad_group": "Bitte wählen Sie zuerst eine Anzeigengruppe aus."
+    }
+  },
+  "create_campaign": {
+    "title": "Neue Kampagne",
+    "subtitle": "Starten Sie Ihre nächste Werbekampagne",
+    "steps": {
+      "select_site": "Website auswählen",
+      "campaign_goals": "Kampagnenziele",
+      "review": "Überprüfung"
+    },
+    "select_site": {
+      "title": "Wählen Sie eine Website",
+      "description": "Wählen Sie die Website, die diese Kampagne bewerben wird. Websitekontext hilft der KI, bessere Kampagnen zu generieren.",
+      "no_sites": "Sie haben noch keine Websites erstellt. Erstellen Sie zuerst eine, um KI-gestützte Kampagnengenerierung zu nutzen.",
+      "go_to_sites": "Gehe zu Websites"
+    },
+    "campaign_goals": {
+      "title": "Kampagnenkonfiguration",
+      "description": "Beschreiben Sie Ihre Ziele und wählen Sie aus, was generiert werden soll.",
+      "goals_label": "Kampagnenziele",
+      "goals_placeholder": "z.B. Mehr Verkäufe für Sommerkollektion ankurbeln, junge Erwachsene in Deutschland ansprechen...",
+      "target_language": "Zielsprache",
+      "what_to_generate": "Was soll die KI generieren?",
+      "generate_ad_groups": "Anzeigengruppen (2-3 thematische Gruppen)",
+      "generate_keywords": "Schlüsselwörter (5-10 pro Anzeigengruppe)",
+      "generate_ads": "Anzeigen (1-2 pro Anzeigengruppe)",
+      "generating": "Wird generiert...",
+      "generating_structure": "Kampagnenstruktur wird generiert...",
+      "generate_button": "Komplette Kampagne generieren"
+    },
+    "review": {
+      "campaign_name": "Kampagnenname",
+      "campaign_name_placeholder": "z.B. Sommerschlussverkauf 2025",
+      "campaign_type": "Kampagnentyp",
+      "daily_budget": "Tagesbudget",
+      "start_status": "Startstatus",
+      "launch_now": "Jetzt starten",
+      "start_paused": "Pausiert starten",
+      "ai_generated": "KI generiert:",
+      "ad_groups_count": "{{count}} Anzeigengruppen",
+      "keywords_count": "{{count}} Schlüsselwörter",
+      "ads_count": "{{count}} Anzeigen"
+    },
+    "campaign_types": {
+      "search": "Suche",
+      "display": "Display",
+      "video": "Video",
+      "shopping": "Shopping",
+      "performance_max": "PMax"
+    },
+    "campaign_types_desc": {
+      "search": "Textanzeigen bei Google-Suche",
+      "display": "Visuelle Anzeigen auf Websites",
+      "video": "Videoanzeigen auf YouTube",
+      "shopping": "Produktlisten",
+      "performance_max": "KI-optimiert über Kanäle"
+    },
+    "messages": {
+      "select_site": "Bitte wählen Sie eine Website, um fortzufahren.",
+      "enter_goals": "Bitte beschreiben Sie Ihre Kampagnenziele.",
+      "enter_name": "Bitte geben Sie einen Kampagnennamen ein",
+      "budget_min": "Das Budget muss mindestens 1 € betragen",
+      "generation_failed": "KI-Erstellung fehlgeschlagen. Bitte versuchen Sie es erneut."
+    },
+    "actions": {
+      "create": "Kampagne erstellen",
+      "cancel": "Abbrechen",
+      "back": "Zurück",
+      "next": "Weiter"
+    }
+  },
+  "create_site": {
+    "title": "Neue Website",
+    "subtitle": "Richten Sie eine Website für die KI-Content-Erstellung ein",
+    "site_url": "Website-URL",
+    "site_url_placeholder": "https://www.microsoft.com",
+    "analyze_with_ai": "Mit KI analysieren",
+    "site_name": "Websitename",
+    "site_name_placeholder": "z.B. Mein Online-Shop",
+    "description": "Beschreibung",
+    "description_placeholder": "Kurze Beschreibung, was diese Website bietet...",
+    "seo_keywords": "SEO-Schlüsselwörter (kommagetrennt)",
+    "seo_keywords_placeholder": "z.B. Schuhe, Mode, Sommerschlussverkauf",
+    "messages": {
+      "url_required": "Bitte geben Sie zuerst eine URL ein.",
+      "analysis_failed": "KI-Analyse fehlgeschlagen. Bitte versuchen Sie es erneut oder füllen Sie die Daten manuell aus."
+    },
+    "actions": {
+      "create": "Website erstellen",
+      "cancel": "Abbrechen"
+    }
+  },
+  "import": {
+    "title": "Google Ads-Daten importieren",
+    "upload_file": "Datei hochladen",
+    "paste_text": "Text einfügen",
+    "select_file": "CSV/TSV-Datei auswählen",
+    "file_support": "Unterstützt das Google Ads Editor-Exportformat (CSV/TSV).",
+    "paste_csv": "CSV-Daten einfügen",
+    "paste_placeholder": "Kampagne,Anzeigengruppe,Schlüsselwort,Kriterientyp,Status\nMeine Kampagne,Meine Anzeigengruppe,Test-Schlüsselwort,Breit,Angeschaltet",
+    "import_data": "Daten importieren",
+    "success_title": "Import erfolgreich!",
+    "messages": {
+      "paste_required": "Bitte fügen Sie zuerst einige CSV-Daten ein.",
+      "processing_failed": "Fehler bei der Datenverarbeitung. Bitte prüfen Sie das Format.",
+      "parsing_error": "Parsing-Fehler: {{error}}"
+    },
+    "stats": {
+      "campaigns": "Kampagnen:",
+      "ad_groups": "Anzeigengruppen:",
+      "keywords": "Schlüsselwörter:",
+      "ads": "Anzeigen:"
+    }
+  },
+  "export": {
+    "title": "Daten exportieren",
+    "format": "Exportformat",
+    "csv": "CSV",
+    "csv_desc": "Mit Google Ads Editor kompatibel",
+    "json": "JSON",
+    "json_desc": "Vollständige Datensicherung",
+    "select_entities": "Zu exportierende Entitäten auswählen",
+    "select_all": "Alles auswählen",
+    "deselect_all": "Alles abwählen",
+    "export_entities": "{{count}} {{entity}} exportieren",
+    "export_entity": "{{count}} Entität exportieren",
+    "success_title": "Export erfolgreich!",
+    "stats": {
+      "sites": "Websites:",
+      "campaigns": "Kampagnen:",
+      "ad_groups": "Anzeigengruppen:",
+      "keywords": "Schlüsselwörter:",
+      "ads": "Anzeigen:"
+    },
+    "messages": {
+      "csv_info": "Der CSV-Export erstellt eine Datei, die mit dem Google Ads Editor kompatibel ist. Websites werden als separate Dateien exportiert.",
+      "json_info": "Der JSON-Export enthält alle Daten in einer einzigen Datei zur Sicherung und Wiederherstellung.",
+      "downloaded_csv": "Heruntergeladen als CSV-Datei(en)",
+      "downloaded_json": "Heruntergeladen als JSON-Datei"
+    }
+  },
+  "intro_wizard": {
+    "steps": {
+      "welcome": "Willkommen",
+      "terms": "Bedingungen",
+      "api_setup": "API-Einrichtung",
+      "safety_first": "Sicherheit zuerst"
+    },
+    "welcome": {
+      "title": "Willkommen bei Defo Ads",
+      "description": "Ein 100% kostenloses, privates und lokal-fokussiertes Tool zur Verwaltung Ihrer Google Ads-Kampagnen.",
+      "privacy_title": "🔒 Ihre Daten bleiben bei Ihnen",
+      "privacy_description": "Wir speichern Ihre Kampagnen, Schlüsselwörter oder API-Schlüssel nicht auf unseren Servern — alles bleibt lokal in Ihrem Browser."
+    },
+    "terms": {
+      "title": "Geschäftsbedingungen",
+      "description": "Bitte überprüfen und akzeptieren Sie unsere Bedingungen, bevor Sie fortfahren.",
+      "key_points": "Wichtige Punkte:",
+      "point_1": "Alle Daten werden lokal in Ihrem Browser gespeichert",
+      "point_2": "Wir sammeln oder übertragen Ihre Daten nicht",
+      "point_3": "KI-Funktionen nutzen Ihren eigenen OpenAI-API-Schlüssel",
+      "point_4": "Sie sind verantwortlich für Datensicherungen",
+      "point_5": "Der Dienst wird \"as is\" ohne Gewährleistungen bereitgestellt",
+      "read_full": "Vollständige Geschäftsbedingungen lesen",
+      "accept": "Ich akzeptiere die Geschäftsbedingungen"
+    },
+    "api_setup": {
+      "title": "Machen Sie sich mit KI fit",
+      "description": "Um die KI-Generierungsfunktionen zu nutzen, benötigen Sie Ihren eigenen OpenAI-API-Schlüssel.",
+      "openai_key": "OpenAI-API-Schlüssel",
+      "key_placeholder": "sk-...",
+      "key_helper": "Wird lokal in Ihrem Browser gespeichert. Sie können diesen Schritt überspringen und später in den Einstellungen hinzufügen.",
+      "get_key": "Noch keinen Schlüssel? Hier bekommen."
+    },
+    "safety_first": {
+      "title": "Vergessen Sie nicht zu sichern!",
+      "description": "Da Ihre Daten lokal sind, gehen sie verloren, wenn Sie Ihren Browsercache löschen.",
+      "warning_title": "⚠️ Empfohlene Angewohnheit",
+      "warning_description": "Verwenden Sie regelmäßig die Export-Taste in der oberen Leiste, um eine Sicherung Ihrer Kampagnen zu speichern."
+    },
+    "actions": {
+      "back": "Zurück",
+      "next": "Weiter",
+      "get_started": "Startbereit"
+    }
+  },
+  "cookie_consent": {
+    "title": "Wir respektieren Ihre Privatsphäre",
+    "description": "Wir verwenden Cookies, um zu analysieren, wie Sie unsere App nutzen und um Ihre Erfahrung zu verbessern. Es werden keine persönlichen Daten erhoben.",
+    "decline": "Ablehnen",
+    "accept": "Akzeptieren"
+  },
+  "ad_translate": {
+    "title": "Anzeigentext übersetzen",
+    "description": "Verwenden Sie KI, um Ihren Anzeigentext zu übersetzen und gleichzeitig Zeichenbeschränkungen und einen überzeugenden Ton beizubehalten.",
+    "target_language": "Zielsprache",
+    "translate_button": "Mit KI übersetzen",
+    "translation_complete": "Übersetzung abgeschlossen! Überprüfen Sie unten und klicken Sie auf \"Übersetzung anwenden\", um Ihre Anzeige zu aktualisieren.",
+    "translated_headlines": "Übersetzte Überschriften",
+    "translated_descriptions": "Übersetzte Beschreibungen",
+    "apply_translation": "Übersetzung anwenden"
+  },
+  "ad_sitelinks": {
+    "title": "Sitelinks",
+    "description": "Fügen Sie bis zu 4 Sitelinks hinzu, um den Benutzern mehr Klickoptionen zu geben.",
+    "load_from_site": "Von Website laden",
+    "select_site": "Wählen Sie eine Website...",
+    "load": "Laden",
+    "generate_button": "Sitelinks mit KI generieren",
+    "sitelink": "Sitelink {{num}}",
+    "link_text": "Link-Text",
+    "url_path": "URL-Pfad",
+    "url_placeholder": "/seite",
+    "description_line_1": "Beschreibung Zeile 1",
+    "description_line_2": "Beschreibung Zeile 2",
+    "add_sitelink": "Sitelink hinzufügen",
+    "no_sitelinks": "Keine Sitelinks konfiguriert. Manuell hinzufügen oder mit KI generieren.",
+    "char_limit_25": "{{count}}/25",
+    "char_limit_35": "{{count}}/35"
+  },
+  "ad_landing_pages": {
+    "title": "Landingpage-URLs",
+    "description": "Vorgeschlagene Landingpages für diese Anzeige. Verwenden Sie diese, um verschiedene Ziele zu testen.",
+    "generate_button": "Landingpages mit KI generieren",
+    "add_landing_page": "Landingpage hinzufügen",
+    "url": "URL",
+    "label": "Label",
+    "landing_page": "Landingpage {{num}}",
+    "no_landing_pages": "Keine Landingpages konfiguriert. Mit KI generieren oder manuell hinzufügen."
+  },
+  "ad_review": {
+    "title": "Anzeigenauswertung",
+    "description": "Holen Sie sich KI-gestütztes Feedback und Verbesserungsvorschläge für Ihre Anzeige.",
+    "review_button": "Anzeige mit KI bewerten",
+    "overall_score": "Gesamtbewertung",
+    "top_recommendation": "Top-Empfehlung",
+    "detailed_ratings": "Detaillierte Bewertungen",
+    "suggested_improvement": "Vorgeschlagene Verbesserung",
+    "apply_improvement": "Verbesserung anwenden",
+    "rating_excellent": "Ausgezeichnet",
+    "rating_good": "Gut",
+    "rating_needs_work": "Verbesserungswürdig",
+    "rating_critical": "Kritisch",
+    "empty_title": "Bereit Ihre Anzeige zu verbessern?",
+    "empty_description": "Klicken Sie oben auf die Taste, um KI-gestützte Erkenntnisse und umsetzbare Vorschläge zu erhalten.",
+    "categories": {
+      "relevance_clarity": "Relevanz & Klarheit",
+      "call_to_action": "Handlungsaufforderung",
+      "emotional_appeal": "Emotionaler Reiz",
+      "keyword_usage": "Schlüsselwortverwendung",
+      "character_optimization": "Zeichenoptimierung"
+    }
+  },
+  "ad_preview": {
+    "title": "Vorschau der Google-Suchanzeige",
+    "description": "Dies ist eine Annäherung daran, wie Ihre Anzeige in den Google-Suchergebnissen angezeigt werden kann."
+  },
+  "campaign_keywords": {
+    "select_ad_group": "Wählen Sie eine Anzeigengruppe aus, um Schlüsselwörter anzuzeigen."
+  },
+  "campaign_ads": {
+    "description": "Anzeigen für diese Kampagne werden hier angezeigt."
+  },
+  "ad_group_keywords": {
+    "description": "Schlüsselwörter für diese Anzeigengruppe werden hier angezeigt."
+  },
+  "ad_group_ads": {
+    "description": "Anzeigen für diese Anzeigengruppe werden hier angezeigt."
+  },
+  "languages": {
+    "en": "Englisch",
+    "de": "Deutsch",
+    "fr": "Französisch",
+    "es": "Spanisch",
+    "it": "Italienisch",
+    "pt": "Portugiesisch",
+    "nl": "Niederländisch",
+    "pl": "Polnisch",
+    "ja": "Japanisch",
+    "zh": "Chinesisch",
+    "ko": "Koreanisch"
+  },
+  "confirmations": {
+    "delete_campaigns": "{{count}} Kampagne(n)?",
+    "delete_sites": "{{count}} Website(s)?",
+    "delete_items": "{{count}} Elemente?"
+  },
+  "prompt_editor": {
+    "select_template": "Eingabeaufforderungsvorlage auswählen",
+    "defaults": "Standardwerte",
+    "available_placeholders": "Verfügbare Platzhalter",
+    "save_template": "Vorlage speichern",
+    "saved": "Eingabeaufforderung erfolgreich gespeichert!",
+    "reset_confirm": "Alle Eingabeaufforderungen auf Werkseinstellungen zurücksetzen? Dies kann nicht rückgängig gemacht werden.",
+    "reset_success": "Eingabeaufforderungen auf Werkseinstellungen zurückgesetzt.",
+    "no_prompts": "Keine Eingabeaufforderungen gefunden.",
+    "initialize_defaults": "Standards initialisieren"
+  },
+  "ai_assist": {
+    "api_key_required": "API-Schlüssel erforderlich",
+    "api_key_description": "Um KI-Funktionen zu nutzen, müssen Sie Ihren OpenAI-API-Schlüssel hinzufügen. Dieser wird lokal in Ihrem Browser gespeichert und niemals an unsere Server gesendet.",
+    "go_to_settings": "Zu den Einstellungen gehen",
+    "no_key": "Noch keinen Schlüssel?",
+    "get_key": "Bei OpenAI einen Schlüssel bekommen",
+    "custom_instructions": "Benutzerdefinierte Anweisungen",
+    "instructions_description": "Fügen Sie spezifische Details oder Anweisungen hinzu, die die KI berücksichtigen soll."
+  },
+  "placeholder": {
+    "description": "Diese Ansicht zeigt eine Liste der {{type}}. Importieren Sie eine CSV, um Daten zu füllen."
+  },
+  "negative_keywords": {
+    "dialog": {
+      "save": "Liste speichern",
+      "edit_title": "Negative Liste bearbeiten",
+      "keywords_label": "Schlüsselwörter",
+      "create_title": "Negative Liste erstellen",
+      "keywords_helper": "Geben Sie ein negatives Schlüsselwort pro Zeile ein",
+      "name_label": "Listenname"
+    },
+    "conflicts": {
+      "ignore_action": "Ignorieren",
+      "fix_action": "Beheben",
+      "no_conflicts": "✅ Keine Konflikte gefunden! Ihre negativen Listen sind sicher.",
+      "run_check": "Konfliktprüfung durchführen",
+      "conflict_description": "Das negative Schlüsselwort \"{{negative}}\" (aus Liste \"{{list}}\") blockiert Ihr positives Schlüsselwort \"{{positive}}\" in der Kampagne \"{{campaign}}\".",
+      "conflicts_found": "⚠️ Es wurden {{count}} potenzielle Konflikte gefunden."
+    },
+    "subtitle": "Verwalten Sie globale negative Listen und erkennen Sie Konflikte mit Ihren positiven Schlüsselwörtern.",
+    "lists": {
+      "all_campaigns": "Alle Kampagnen",
+      "edit_list": "Liste bearbeiten",
+      "universal_lists": "Universallisten",
+      "no_custom_lists": "Noch keine benutzerdefinierten Listen. Erstellen Sie eine, um bestimmte Begriffe zu blockieren.",
+      "select_campaigns": "Kampagnen auswählen",
+      "list_name": "Listenname",
+      "keywords": "Schlüsselwörter (eins pro Zeile)",
+      "custom_lists": "Ihre benutzerdefinierten Listen",
+      "applied_to": "Angewendet auf",
+      "delete_list": "Liste löschen",
+      "create_list": "Benutzerdefinierte Liste erstellen"
+    },
+    "tabs": {
+      "lists": "Listenmanager",
+      "conflicts": "Konfliktdetektor"
+    },
+    "title": "Intelligente negative Schlüsselwörter"
+  }
+}
