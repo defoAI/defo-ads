@@ -10,7 +10,7 @@
 [![Live Demo](https://img.shields.io/badge/Demo-ads.defoai.com-brightgreen)](https://ads.defoai.com)
 
 <p align="center">
-  <a href="https://ads.defoai.com"><strong>🚀 Try Defo Ads Free — No Sign-up Required →</strong></a>
+  <a href="https://ads.defoai.com"><strong>🚀 Try Defo Ads Premium — No Sign-up Required →</strong></a>
 </p>
 
 
