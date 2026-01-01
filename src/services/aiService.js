@@ -1,7 +1,55 @@
 // File: src/services/aiService.js
 // Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
 
 const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
+
+// ============================================================================
+// Provider Registry
+// ============================================================================
+
+/**
+ * @typedef {Object} AIProvider
+ * @property {(systemPrompt: string, userPrompt: string) => Promise<string>} generateCompletion
+ */
+
+/** @type {AIProvider|null} */
+let customProvider = null;
+
+/**
+ * Register a custom AI provider.
+ * This allows extensions to inject their own AI routing logic.
+ * 
+ * @param {AIProvider} provider - Provider implementing generateCompletion
+ * 
+ * @example
+ * registerAIProvider({
+ *   generateCompletion: async (systemPrompt, userPrompt) => {
+ *     // Custom routing logic
+ *     return await myCustomAICall(systemPrompt, userPrompt);
+ *   }
+ * });
+ */
+export const registerAIProvider = (provider) => {
+    customProvider = provider;
+};
+
+/**
+ * Unregister the custom AI provider (for testing/cleanup)
+ */
+export const unregisterAIProvider = () => {
+    customProvider = null;
+};
+
+/**
+ * Check if a custom provider is registered
+ * @returns {boolean}
+ */
+export const hasCustomProvider = () => customProvider !== null;
+
+// ============================================================================
+// Core AI Functions
+// ============================================================================
 
 export const parseAiResponse = (response) => {
     try {
@@ -40,38 +88,63 @@ const interpolate = (template, data) => {
 };
 
 /**
- * Basic wrapper for OpenAI Chat Completion
+ * Default OpenAI completion (direct client-side call)
+ * @private
  */
-export const generateCompletion = async (systemPrompt, userPrompt) => {
+const defaultOpenAICompletion = async (systemPrompt, userPrompt) => {
     const apiKey = localStorage.getItem('openai_api_key');
     if (!apiKey) {
         throw new Error('OpenAI API Key not configured. Please go to Settings.');
     }
 
-    try {
-        const response = await fetch(OPENAI_API_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${apiKey}`
-            },
-            body: JSON.stringify({
-                model: 'gpt-4o', // Defaulting to 4o as per context, or gpt-4-turbo
-                messages: [
-                    { role: 'system', content: systemPrompt },
-                    { role: 'user', content: userPrompt }
-                ],
-                temperature: 0.7,
-            })
-        });
+    const response = await fetch(OPENAI_API_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+        },
+        body: JSON.stringify({
+            model: 'gpt-4o',
+            messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: userPrompt }
+            ],
+            temperature: 0.7,
+        })
+    });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error?.message || 'OpenAI API Error');
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error?.message || 'OpenAI API Error');
+    }
+
+    const data = await response.json();
+    return data.choices[0]?.message?.content || '';
+};
+
+/**
+ * Generate AI completion using the registered provider.
+ * 
+ * If a custom provider is registered, it's called first.
+ * If the provider returns null/undefined, falls back to default OpenAI.
+ * 
+ * @param {string} systemPrompt - System message for context
+ * @param {string} userPrompt - User's prompt
+ * @returns {Promise<string>} AI generated response
+ */
+export const generateCompletion = async (systemPrompt, userPrompt) => {
+    try {
+        // Try custom provider first (if registered)
+        if (customProvider) {
+            const result = await customProvider.generateCompletion(systemPrompt, userPrompt);
+            if (result !== null && result !== undefined) {
+                return result;
+            }
+            // If provider returns null, fall back to default
         }
 
-        const data = await response.json();
-        return data.choices[0]?.message?.content || '';
+        // Default: Direct OpenAI
+        return await defaultOpenAICompletion(systemPrompt, userPrompt);
     } catch (error) {
         console.error('AI Generation Error:', error);
         throw error;
@@ -122,19 +195,7 @@ export const generateFromPrompt = async (promptTemplate, contextData) => {
         throw new Error('Invalid prompt template');
     }
 
-    // Interpolate placeholders
-    // We assume the whole template is the system prompt context, 
-    // or we can split it. For simplicity, we send the interpolated template as System,
-    // and rely on specific user instructions if needed, or just one big prompt.
-    //
-    // Best practice for these custom prompts: The template is the "System" or "Base" instruction.
-    // We can also have a "User" part if needed, but often one big prompt works for GPT-4.
-
     const content = interpolate(promptTemplate.template, contextData);
-
-    // For now, we send it as a User message to ensure it's followed as an instruction immediately,
-    // or split it. Let's try System + User architecture if the template implies it.
-    // Actually, simple 1-shot: System = "You are a helpful AI.", User = content.
 
     return generateCompletion("You are a helpful AI assistant for Google Ads.", content);
 };

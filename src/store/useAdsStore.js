@@ -7,6 +7,7 @@
 // So we just need the logic we wrote above.
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
+import { getDataProvider, isCloudStorage } from '../services/dataService';
 
 export const useAdsStore = create(
     persist(
@@ -27,19 +28,73 @@ export const useAdsStore = create(
             // Settings
             settings: {
                 askForCustomInstructions: false,
+                useServerAI: true,
             },
 
             // Actions
+            // Actions
+            sync: async () => {
+                if (isCloudStorage()) {
+                    set({ isLoading: true });
+                    try {
+                        const provider = getDataProvider();
+                        const [campaigns, adGroups, keywords, ads, sites] = await Promise.all([
+                            provider.getCampaigns(),
+                            provider.getAdGroups(),
+                            provider.getKeywords(),
+                            provider.getAds(),
+                            provider.getSites()
+                        ]);
+                        set({ campaigns, adGroups, keywords, ads, sites, isLoading: false });
+                    } catch (error) {
+                        console.error('Sync failed:', error);
+                        set({ isLoading: false });
+                    }
+                }
+            },
+
             setCampaigns: (campaigns) => set({ campaigns }),
-            addCampaign: (campaign) => set({ campaigns: [...get().campaigns, { ...campaign, id: campaign.id || crypto.randomUUID() }] }),
-            updateCampaign: (id, updated) => {
+            addCampaign: async (campaign) => {
+                const newCampaign = { ...campaign, id: campaign.id || crypto.randomUUID() };
+                // Optimistic Update
+                set({ campaigns: [...get().campaigns, newCampaign] });
+
+                if (isCloudStorage()) {
+                    try {
+                        const saved = await getDataProvider().saveCampaign(newCampaign);
+                        // Update with server version (e.g. real ID)
+                        set({ campaigns: get().campaigns.map(c => c.id === newCampaign.id ? saved : c) });
+                    } catch (e) {
+                        console.error("Failed to save campaign", e);
+                        // Rollback? For now just log.
+                    }
+                }
+            },
+            updateCampaign: async (id, updated) => {
+                // Optimistic
                 set({ campaigns: get().campaigns.map(c => c.id === id ? { ...c, ...updated } : c) });
+
+                if (isCloudStorage()) {
+                    const campaign = get().campaigns.find(c => c.id === id);
+                    if (campaign) await getDataProvider().saveCampaign(campaign);
+                }
             },
 
             setSites: (sites) => set({ sites }),
-            addSite: (site) => set({ sites: [...get().sites, { ...site, id: site.id || crypto.randomUUID() }] }),
-            updateSite: (id, updated) => {
+            addSite: async (site) => {
+                const newSite = { ...site, id: site.id || crypto.randomUUID() };
+                set({ sites: [...get().sites, newSite] });
+                if (isCloudStorage()) {
+                    const saved = await getDataProvider().saveSite(newSite);
+                    set({ sites: get().sites.map(s => s.id === newSite.id ? saved : s) });
+                }
+            },
+            updateSite: async (id, updated) => {
                 set({ sites: get().sites.map(s => s.id === id ? { ...s, ...updated } : s) });
+                if (isCloudStorage()) {
+                    const site = get().sites.find(s => s.id === id);
+                    if (site) await getDataProvider().saveSite(site);
+                }
             },
 
             setPrompts: (prompts) => set({ prompts }),
@@ -54,12 +109,55 @@ export const useAdsStore = create(
             resetPrompts: () => set({ prompts: get().defaultPrompts() }), // Helper to reset to defaults
 
             setAdGroups: (adGroups) => set({ adGroups }),
-            addAdGroup: (adGroup) => set({ adGroups: [...get().adGroups, { ...adGroup, id: adGroup.id || crypto.randomUUID() }] }),
-            setKeywords: (keywords) => set({ keywords }),
-            addKeyword: (keyword) => set({ keywords: [...get().keywords, { ...keyword, id: keyword.id || crypto.randomUUID() }] }),
-            setAds: (ads) => set({ ads }),
+            addAdGroup: async (adGroup) => {
+                const newGroup = { ...adGroup, id: adGroup.id || crypto.randomUUID() };
+                set({ adGroups: [...get().adGroups, newGroup] });
+                if (isCloudStorage()) {
+                    const saved = await getDataProvider().saveAdGroup(newGroup);
+                    set({ adGroups: get().adGroups.map(x => x.id === newGroup.id ? saved : x) });
+                }
+            },
+            updateAdGroup: async (id, updated) => {
+                set({ adGroups: get().adGroups.map(x => x.id === id ? { ...x, ...updated } : x) });
+                if (isCloudStorage()) {
+                    const item = get().adGroups.find(x => x.id === id);
+                    if (item) await getDataProvider().saveAdGroup(item);
+                }
+            },
 
-            addAd: (ad) => set({ ads: [...get().ads, { ...ad, id: ad.id || crypto.randomUUID() }] }),
+            setKeywords: (keywords) => set({ keywords }),
+            addKeyword: async (keyword) => {
+                const newKw = { ...keyword, id: keyword.id || crypto.randomUUID() };
+                set({ keywords: [...get().keywords, newKw] });
+                if (isCloudStorage()) {
+                    const saved = await getDataProvider().saveKeyword(newKw);
+                    set({ keywords: get().keywords.map(x => x.id === newKw.id ? saved : x) });
+                }
+            },
+            updateKeyword: async (id, updated) => {
+                set({ keywords: get().keywords.map(x => x.id === id ? { ...x, ...updated } : x) });
+                if (isCloudStorage()) {
+                    const item = get().keywords.find(x => x.id === id);
+                    if (item) await getDataProvider().saveKeyword(item);
+                }
+            },
+
+            setAds: (ads) => set({ ads }),
+            addAd: async (ad) => {
+                const newAd = { ...ad, id: ad.id || crypto.randomUUID() };
+                set({ ads: [...get().ads, newAd] });
+                if (isCloudStorage()) {
+                    const saved = await getDataProvider().saveAd(newAd);
+                    set({ ads: get().ads.map(x => x.id === newAd.id ? saved : x) });
+                }
+            },
+            updateAd: async (id, updated) => {
+                set({ ads: get().ads.map(x => x.id === id ? { ...x, ...updated } : x) });
+                if (isCloudStorage()) {
+                    const item = get().ads.find(x => x.id === id);
+                    if (item) await getDataProvider().saveAd(item);
+                }
+            },
 
             // Negative Keyword List Actions
             setNegativeKeywordLists: (lists) => set({ negativeKeywordLists: lists }),
@@ -94,11 +192,27 @@ export const useAdsStore = create(
             getAdsByAdGroup: (adGroupId) => get().ads.filter(a => a.adGroupId == adGroupId),
 
             // Delete Actions
-            deleteSites: (ids) => set({ sites: get().sites.filter(s => !ids.includes(s.id)) }),
-            deleteCampaigns: (ids) => set({ campaigns: get().campaigns.filter(c => !ids.includes(c.id)) }),
-            deleteAdGroups: (ids) => set({ adGroups: get().adGroups.filter(ag => !ids.includes(ag.id)) }),
-            deleteKeywords: (ids) => set({ keywords: get().keywords.filter(k => !ids.includes(k.id)) }),
-            deleteAds: (ids) => set({ ads: get().ads.filter(a => !ids.includes(a.id)) }),
+            // Delete Actions
+            deleteSites: async (ids) => {
+                set({ sites: get().sites.filter(s => !ids.includes(s.id)) });
+                if (isCloudStorage()) await getDataProvider().deleteSites(ids);
+            },
+            deleteCampaigns: async (ids) => {
+                set({ campaigns: get().campaigns.filter(c => !ids.includes(c.id)) });
+                if (isCloudStorage()) await getDataProvider().deleteCampaigns(ids);
+            },
+            deleteAdGroups: async (ids) => {
+                set({ adGroups: get().adGroups.filter(ag => !ids.includes(ag.id)) });
+                if (isCloudStorage()) await getDataProvider().deleteAdGroups(ids);
+            },
+            deleteKeywords: async (ids) => {
+                set({ keywords: get().keywords.filter(k => !ids.includes(k.id)) });
+                if (isCloudStorage()) await getDataProvider().deleteKeywords(ids);
+            },
+            deleteAds: async (ids) => {
+                set({ ads: get().ads.filter(a => !ids.includes(a.id)) });
+                if (isCloudStorage()) await getDataProvider().deleteAds(ids);
+            },
 
             // Import Action
             importData: (rows) => {
