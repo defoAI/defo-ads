@@ -31,13 +31,13 @@ export const useAdsStore = create(
 
             // Actions
             setCampaigns: (campaigns) => set({ campaigns }),
-            addCampaign: (campaign) => set({ campaigns: [...get().campaigns, campaign] }),
+            addCampaign: (campaign) => set({ campaigns: [...get().campaigns, { ...campaign, id: campaign.id || crypto.randomUUID() }] }),
             updateCampaign: (id, updated) => {
                 set({ campaigns: get().campaigns.map(c => c.id === id ? { ...c, ...updated } : c) });
             },
 
             setSites: (sites) => set({ sites }),
-            addSite: (site) => set({ sites: [...get().sites, site] }),
+            addSite: (site) => set({ sites: [...get().sites, { ...site, id: site.id || crypto.randomUUID() }] }),
             updateSite: (id, updated) => {
                 set({ sites: get().sites.map(s => s.id === id ? { ...s, ...updated } : s) });
             },
@@ -54,12 +54,12 @@ export const useAdsStore = create(
             resetPrompts: () => set({ prompts: get().defaultPrompts() }), // Helper to reset to defaults
 
             setAdGroups: (adGroups) => set({ adGroups }),
-            addAdGroup: (adGroup) => set({ adGroups: [...get().adGroups, adGroup] }),
+            addAdGroup: (adGroup) => set({ adGroups: [...get().adGroups, { ...adGroup, id: adGroup.id || crypto.randomUUID() }] }),
             setKeywords: (keywords) => set({ keywords }),
-            addKeyword: (keyword) => set({ keywords: [...get().keywords, keyword] }),
+            addKeyword: (keyword) => set({ keywords: [...get().keywords, { ...keyword, id: keyword.id || crypto.randomUUID() }] }),
             setAds: (ads) => set({ ads }),
 
-            addAd: (ad) => set({ ads: [...get().ads, ad] }),
+            addAd: (ad) => set({ ads: [...get().ads, { ...ad, id: ad.id || crypto.randomUUID() }] }),
 
             // Negative Keyword List Actions
             setNegativeKeywordLists: (lists) => set({ negativeKeywordLists: lists }),
@@ -102,8 +102,7 @@ export const useAdsStore = create(
 
             // Import Action
             importData: (rows) => {
-                let nextId = 1;
-                const generateId = () => nextId++;
+                const generateId = () => crypto.randomUUID();
 
                 const campaigns = [];
                 const adGroups = [];

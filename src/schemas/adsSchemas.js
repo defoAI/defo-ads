@@ -13,7 +13,7 @@ export const CampaignSchema = z.object({
     'Status': z.enum(['Enabled', 'Paused', 'Removed']).default('Paused'),
     'Networks': z.string().optional(),
     'Languages': z.string().default('en'),
-    'siteId': z.number().optional(), // Link to a Site configuration
+    'siteId': z.string().optional(), // Link to a Site configuration
 });
 
 /**
@@ -21,7 +21,7 @@ export const CampaignSchema = z.object({
  * Used for AI generation context
  */
 export const SiteSchema = z.object({
-    id: z.number().optional(), // Auto-generated
+    id: z.string().optional(), // Auto-generated
     name: z.string().min(1, "Site name is required"),
     url: z.string().url("Must be a valid URL"),
     description: z.string().max(500, "Description max 500 chars").optional(),
