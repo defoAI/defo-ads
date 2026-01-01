@@ -252,9 +252,6 @@ const NegativeKeywordsView = () => {
 
     return (
         <Box sx={{ p: 3, width: '100%' }}>
-            <Typography variant="h4" gutterBottom>
-                {t('negative_keywords.title')}
-            </Typography>
             <Typography variant="subtitle1" color="textSecondary" paragraph>
                 {t('negative_keywords.subtitle')}
             </Typography>

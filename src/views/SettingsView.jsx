@@ -99,10 +99,6 @@ const SettingsView = () => {
     return (
         <Box>
             <Paper sx={{ p: 3 }}>
-                <Typography variant="h6" gutterBottom>
-                    {t('settings.title')}
-                </Typography>
-
                 <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
                     <Tabs value={activeTab} onChange={handleTabChange} aria-label="settings tabs">
                         <Tab icon={<SettingsIcon />} iconPosition="start" label={t('settings.tabs.general')} />
