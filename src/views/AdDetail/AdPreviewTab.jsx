@@ -1,3 +1,8 @@
+// File: src/views/AdDetail/AdPreviewTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Google Ads-style preview rendering for responsive search ads.
+
 import React from 'react';
 import {
     Box,

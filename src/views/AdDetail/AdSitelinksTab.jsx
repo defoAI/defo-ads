@@ -1,3 +1,8 @@
+// File: src/views/AdDetail/AdSitelinksTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Sitelink extensions editor with AI generation support.
+
 import React from 'react';
 import {
     Box,

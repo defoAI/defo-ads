@@ -7,6 +7,7 @@
     "export": "Exportieren"
   },
   "nav": {
+    "home": "Startseite",
     "sites": "Websites",
     "campaigns": "Kampagnen",
     "adgroups": "Anzeigengruppen",
@@ -31,7 +32,8 @@
     "actions": {
       "create": "Website laden",
       "new": "Website laden",
-      "delete": "Löschen"
+      "delete": "Löschen",
+      "add_first": "Fügen Sie Ihre erste Website hinzu"
     },
     "counts": {
       "site_count": "{{count}} Website",
@@ -56,7 +58,8 @@
     "actions": {
       "create": "Kampagne erstellen",
       "new": "Neue Kampagne",
-      "delete": "Löschen"
+      "delete": "Löschen",
+      "create_first": "Erstellen Sie Ihre erste Kampagne"
     },
     "counts": {
       "campaign_count": "{{count}} Kampagne",
@@ -401,6 +404,11 @@
     "actions": {
       "create": "Website laden",
       "cancel": "Abbrechen"
+    },
+    "success": {
+      "title": "Website erstellt!",
+      "create_campaign": "Eine Kampagne erstellen",
+      "message": "ist bereit. Was möchten Sie als Nächstes tun?"
     }
   },
   "import": {
@@ -657,5 +665,29 @@
       "conflicts": "Konfliktdetektor"
     },
     "title": "Intelligente negative Schlüsselwörter"
+  },
+  "dashboard": {
+    "tip_context_title": "Kontext verbinden",
+    "no_sites_title": "Beginnen Sie mit einer Website",
+    "tip_context_desc": "Fügen Sie 'Websites' hinzu, um der KI besseren Kontext für die Erstellung zu geben.",
+    "overview_subtitle": "Hier ist, was heute mit Ihren Anzeigen passiert.",
+    "no_activity_title": "Loslegen",
+    "tip_export_desc": "Exportieren Sie Ihre Kampagnen direkt im Google Ads-Format, wenn Sie bereit sind.",
+    "quick_tips": "Schnelle Tipps",
+    "tip_ai_desc": "Verwenden Sie die Schaltfläche 'Generieren' in Kampagnen, um sofort Anzeigentexte zu erstellen.",
+    "tip_ai_title": "Generative KI",
+    "no_activity": "Keine aktuellen Aktivitäten gefunden. Beginnen Sie mit der Erstellung einer Kampagne!",
+    "tip_export_title": "Exportbereit",
+    "welcome": "Willkommen zurück",
+    "view_all": "Alle anzeigen",
+    "recent_activity": "Aktuelle Aktivitäten",
+    "no_sites_desc": "Fügen Sie Ihre erste Website hinzu, um der KI Kontext für die Erstellung besserer Anzeigentexte zu geben."
+  },
+  "campaigns": {
+    "new": "Neue Kampagne",
+    "create_first": "Erstellen Sie Ihre erste Kampagne"
+  },
+  "sites": {
+    "add_first": "Fügen Sie Ihre erste Website hinzu"
   }
 }

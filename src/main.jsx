@@ -1,3 +1,8 @@
+// File: src/main.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Application entry point with i18n initialization.
+
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'

@@ -1,3 +1,8 @@
+// File: src/views/AdDetail/AdReviewTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// AI-powered ad review tab with scoring and improvement suggestions.
+
 import React from 'react';
 import {
     Box,

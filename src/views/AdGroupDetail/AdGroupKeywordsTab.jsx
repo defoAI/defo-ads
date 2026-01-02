@@ -1,3 +1,8 @@
+// File: src/views/AdGroupDetail/AdGroupKeywordsTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Ad group keywords listing tab component.
+
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';

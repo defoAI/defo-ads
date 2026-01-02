@@ -1,4 +1,8 @@
 // File: src/utils/negativeKeywordUtils.js
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Utility functions for negative keyword conflict detection.
+
 /**
  * Detects conflicts between positive keywords and negative keyword lists.
  * @param {Array} keywords - List of positive keywords objects { id, Keyword, adGroupId }

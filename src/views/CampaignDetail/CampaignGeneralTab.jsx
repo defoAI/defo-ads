@@ -1,3 +1,8 @@
+// File: src/views/CampaignDetail/CampaignGeneralTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Campaign general settings and configuration tab.
+
 import React from 'react';
 import {
     Box,

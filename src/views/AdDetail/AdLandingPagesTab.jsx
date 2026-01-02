@@ -1,3 +1,8 @@
+// File: src/views/AdDetail/AdLandingPagesTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Landing pages management tab with AI generation support.
+
 import React from 'react';
 import {
     Box,

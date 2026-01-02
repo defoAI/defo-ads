@@ -1,3 +1,7 @@
+// File: src/i18n.js
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Internationalization configuration using i18next with browser language detection.
 
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';

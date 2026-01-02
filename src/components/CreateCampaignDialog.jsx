@@ -99,8 +99,12 @@ const CreateCampaignDialog = ({ open, onClose }) => {
     useEffect(() => {
         if (open) {
             trackCampaignDialogOpen();
+            // Auto-select site if only one exists (minimal friction)
+            if (sites.length === 1 && !siteId) {
+                setSiteId(sites[0].id);
+            }
         }
-    }, [open]);
+    }, [open, sites, siteId]);
 
     const languages = [
         { code: 'en', name: t('languages.en') },

@@ -131,6 +131,15 @@ const SettingsView = () => {
                                 variant="contained"
                                 startIcon={<SaveIcon />}
                                 onClick={handleSave}
+                                sx={{
+                                    borderRadius: 2,
+                                    textTransform: 'none',
+                                    fontWeight: 600,
+                                    boxShadow: 'none',
+                                    '&:hover': {
+                                        boxShadow: '0 4px 12px rgba(25, 118, 210, 0.25)',
+                                    },
+                                }}
                             >
                                 {t('settings.api.save')}
                             </Button>

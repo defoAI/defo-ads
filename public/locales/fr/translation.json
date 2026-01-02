@@ -7,6 +7,7 @@
     "export": "Exporter"
   },
   "nav": {
+    "home": "Accueil",
     "sites": "Sites",
     "campaigns": "Campagnes",
     "adgroups": "Groupes d'annonces",
@@ -31,7 +32,8 @@
     "actions": {
       "create": "Charger le site",
       "new": "Charger un site",
-      "delete": "Supprimer"
+      "delete": "Supprimer",
+      "add_first": "Ajoutez votre premier site"
     },
     "counts": {
       "site_count": "{{count}} site",
@@ -56,7 +58,8 @@
     "actions": {
       "create": "Créer une campagne",
       "new": "Nouvelle campagne",
-      "delete": "Supprimer"
+      "delete": "Supprimer",
+      "create_first": "Créez votre première campagne"
     },
     "counts": {
       "campaign_count": "{{count}} campagne",
@@ -401,6 +404,11 @@
     "actions": {
       "create": "Charger le site",
       "cancel": "Annuler"
+    },
+    "success": {
+      "title": "Site créé !",
+      "create_campaign": "Créer une campagne",
+      "message": "est prêt. Que souhaitez-vous faire ensuite ?"
     }
   },
   "import": {
@@ -657,5 +665,29 @@
       "fix_action": "Corriger"
     },
     "subtitle": "Gérez les listes de négatifs globales et détectez les conflits avec vos mots-clés positifs."
+  },
+  "dashboard": {
+    "tip_context_title": "Connecter le contexte",
+    "no_sites_title": "Commencez avec un site",
+    "tip_context_desc": "Ajoutez des 'Sites' pour donner à l'IA un meilleur contexte pour la génération.",
+    "overview_subtitle": "Voici ce qui se passe avec vos annonces aujourd'hui.",
+    "no_activity_title": "Commencez",
+    "tip_export_desc": "Exportez vos campagnes directement au format Google Ads lorsque vous êtes prêt.",
+    "quick_tips": "Conseils rapides",
+    "tip_ai_desc": "Utilisez le bouton 'Générer' dans les campagnes pour créer instantanément des textes d'annonces.",
+    "tip_ai_title": "IA générative",
+    "no_activity": "Aucune activité récente trouvée. Commencez par créer une campagne !",
+    "tip_export_title": "Export prêt",
+    "welcome": "Bienvenue de nouveau",
+    "view_all": "Voir tout",
+    "recent_activity": "Activité récente",
+    "no_sites_desc": "Ajoutez votre premier site pour donner à l'IA un contexte pour générer de meilleurs textes d'annonces."
+  },
+  "campaigns": {
+    "new": "Nouvelle campagne",
+    "create_first": "Créez votre première campagne"
+  },
+  "sites": {
+    "add_first": "Ajoutez votre premier site"
   }
 }

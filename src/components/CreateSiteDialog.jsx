@@ -29,7 +29,7 @@ import AiAssistButton from './AiAssistButton';
 import { trackSiteDialogOpen, trackSiteCreated, trackAiAssistClick, trackAiGenerationSuccess, trackAiGenerationError } from '../services/analyticsService';
 import { useTranslation } from 'react-i18next';
 
-const CreateSiteDialog = ({ open, onClose }) => {
+const CreateSiteDialog = ({ open, onClose, onCreateCampaign }) => {
     const { t } = useTranslation();
     const { sites, addSite, prompts } = useAdsStore();
     const theme = useTheme();
@@ -42,6 +42,7 @@ const CreateSiteDialog = ({ open, onClose }) => {
     const [error, setError] = useState(null);
     const [isGenerating, setIsGenerating] = useState(false);
     const [usedAi, setUsedAi] = useState(false);
+    const [createdSite, setCreatedSite] = useState(null); // Track successful creation
 
     // Track dialog open
     useEffect(() => {
@@ -117,7 +118,7 @@ const CreateSiteDialog = ({ open, onClose }) => {
 
         addSite(newSite);
         trackSiteCreated(usedAi);
-        handleClose();
+        setCreatedSite(newSite); // Show success step instead of closing
     };
 
     const handleClose = () => {
@@ -126,7 +127,17 @@ const CreateSiteDialog = ({ open, onClose }) => {
         setDescription('');
         setSeoKeywords('');
         setError(null);
+        setCreatedSite(null);
         onClose();
+    };
+
+    const handleCreateCampaignClick = () => {
+        const site = createdSite;
+        handleClose();
+        // Trigger campaign creation with this site if callback provided
+        if (onCreateCampaign && site) {
+            onCreateCampaign(site.id);
+        }
     };
 
     return (
@@ -162,103 +173,157 @@ const CreateSiteDialog = ({ open, onClose }) => {
             )}
 
             <DialogContent sx={{ pt: fullScreen ? 3 : 3, pb: 2, px: 3 }}>
-                {/* Header */}
-                <Typography variant="h5" align="center" sx={{ fontWeight: 600, mb: 0.5, mt: fullScreen ? 2 : 0 }}>
-                    {t('create_site.title')}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 3 }}>
-                    {t('create_site.subtitle')}
-                </Typography>
+                {createdSite ? (
+                    /* ===== SUCCESS SCREEN ===== */
+                    <Box sx={{ textAlign: 'center', py: 4 }}>
+                        <Avatar
+                            sx={{
+                                width: 64,
+                                height: 64,
+                                bgcolor: 'success.light',
+                                color: 'success.main',
+                                mx: 'auto',
+                                mb: 2
+                            }}
+                        >
+                            <SiteIcon sx={{ fontSize: 32 }} />
+                        </Avatar>
+                        <Typography variant="h5" sx={{ fontWeight: 600, mb: 1 }}>
+                            {t('create_site.success.title', 'Site Created!')}
+                        </Typography>
+                        <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                            "{createdSite.name}" {t('create_site.success.message', 'is ready. What would you like to do next?')}
+                        </Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 280, mx: 'auto' }}>
+                            <Button
+                                variant="contained"
+                                size="large"
+                                fullWidth
+                                onClick={handleCreateCampaignClick}
+                                sx={{
+                                    py: 1.5,
+                                    borderRadius: 2,
+                                    background: 'linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)',
+                                    '&:hover': {
+                                        background: 'linear-gradient(135deg, #1565c0 0%, #1976d2 100%)',
+                                    },
+                                }}
+                            >
+                                {t('create_site.success.create_campaign', 'Create a Campaign')}
+                            </Button>
+                            <Button
+                                variant="outlined"
+                                size="large"
+                                fullWidth
+                                onClick={handleClose}
+                            >
+                                {t('common.done', 'Done')}
+                            </Button>
+                        </Box>
+                    </Box>
+                ) : (
+                    /* ===== FORM ===== */
+                    <>
+                        {/* Header */}
+                        <Typography variant="h5" align="center" sx={{ fontWeight: 600, mb: 0.5, mt: fullScreen ? 2 : 0 }}>
+                            {t('create_site.title')}
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary" align="center" sx={{ mb: 3 }}>
+                            {t('create_site.subtitle')}
+                        </Typography>
 
-                {error && (
-                    <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError(null)}>
-                        {error}
-                    </Alert>
+                        {error && (
+                            <Alert severity="error" sx={{ mb: 2 }} onClose={() => setError(null)}>
+                                {error}
+                            </Alert>
+                        )}
+
+                        {/* URL - First to enable AI analysis */}
+                        <TextField
+                            fullWidth
+                            label={t('create_site.site_url')}
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                            placeholder={t('create_site.site_url_placeholder')}
+                            variant="outlined"
+                            sx={{ mb: 1 }}
+                            autoFocus
+                        />
+
+                        {/* AI Generation Section - prominent like CreateCampaignDialog */}
+                        <Box sx={{ mb: 3 }}>
+                            <AiAssistButton
+                                onGenerate={handleAiAnalysis}
+                                isGenerating={isGenerating}
+                                disabled={!url}
+                                label={t('create_site.analyze_with_ai')}
+                                variant="outlined"
+                                fullWidth
+                                placeholder="e.g., Focus on eco-friendly aspects, highlight premium quality..."
+                            />
+                        </Box>
+
+                        {/* Name */}
+                        <TextField
+                            fullWidth
+                            label={t('create_site.site_name')}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder={t('create_site.site_name_placeholder')}
+                            variant="outlined"
+                            sx={{ mb: 2 }}
+                        />
+
+                        {/* Description */}
+                        <TextField
+                            fullWidth
+                            label={t('create_site.description')}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder={t('create_site.description_placeholder')}
+                            variant="outlined"
+                            multiline
+                            rows={3}
+                            sx={{ mb: 2 }}
+                        />
+
+                        {/* SEO Keywords */}
+                        <TextField
+                            fullWidth
+                            label={t('create_site.seo_keywords')}
+                            value={seoKeywords}
+                            onChange={(e) => setSeoKeywords(e.target.value)}
+                            placeholder={t('create_site.seo_keywords_placeholder')}
+                            variant="outlined"
+                            sx={{ mb: 2 }}
+                        />
+                    </>
                 )}
-
-                {/* URL - First to enable AI analysis */}
-                <TextField
-                    fullWidth
-                    label={t('create_site.site_url')}
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                    placeholder={t('create_site.site_url_placeholder')}
-                    variant="outlined"
-                    sx={{ mb: 1 }}
-                    autoFocus
-                />
-
-                {/* AI Generation Section - prominent like CreateCampaignDialog */}
-                <Box sx={{ mb: 3 }}>
-                    <AiAssistButton
-                        onGenerate={handleAiAnalysis}
-                        isGenerating={isGenerating}
-                        disabled={!url}
-                        label={t('create_site.analyze_with_ai')}
-                        variant="outlined"
-                        fullWidth
-                        placeholder="e.g., Focus on eco-friendly aspects, highlight premium quality..."
-                    />
-                </Box>
-
-                {/* Name */}
-                <TextField
-                    fullWidth
-                    label={t('create_site.site_name')}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder={t('create_site.site_name_placeholder')}
-                    variant="outlined"
-                    sx={{ mb: 2 }}
-                />
-
-                {/* Description */}
-                <TextField
-                    fullWidth
-                    label={t('create_site.description')}
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder={t('create_site.description_placeholder')}
-                    variant="outlined"
-                    multiline
-                    rows={3}
-                    sx={{ mb: 2 }}
-                />
-
-                {/* SEO Keywords */}
-                <TextField
-                    fullWidth
-                    label={t('create_site.seo_keywords')}
-                    value={seoKeywords}
-                    onChange={(e) => setSeoKeywords(e.target.value)}
-                    placeholder={t('create_site.seo_keywords_placeholder')}
-                    variant="outlined"
-                    sx={{ mb: 2 }}
-                />
-
             </DialogContent>
 
-            <DialogActions sx={{ px: 3, pb: 3, gap: 1 }}>
-                <Button onClick={handleClose} sx={{ flex: 1 }}>
-                    {t('create_site.actions.cancel')}
-                </Button>
-                <Button
-                    onClick={handleSubmit}
-                    variant="contained"
-                    size="large"
-                    sx={{
-                        flex: 2,
-                        py: 1.5,
-                        borderRadius: 2,
-                        background: 'linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)',
-                        '&:hover': {
-                            background: 'linear-gradient(135deg, #1565c0 0%, #1976d2 100%)',
-                        },
-                    }}
-                >
-                    {t('create_site.actions.create')}
-                </Button>
-            </DialogActions>
+            {!createdSite && (
+                <DialogActions sx={{ px: 3, pb: 3, gap: 1 }}>
+                    <Button onClick={handleClose} sx={{ flex: 1 }}>
+                        {t('create_site.actions.cancel')}
+                    </Button>
+                    <Button
+                        onClick={handleSubmit}
+                        variant="contained"
+                        size="large"
+                        sx={{
+                            flex: 2,
+                            py: 1.5,
+                            borderRadius: 2,
+                            background: 'linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)',
+                            '&:hover': {
+                                background: 'linear-gradient(135deg, #1565c0 0%, #1976d2 100%)',
+                            },
+                        }}
+                    >
+                        {t('create_site.actions.create')}
+                    </Button>
+                </DialogActions>
+            )}
         </Dialog>
     );
 };

@@ -6,7 +6,25 @@
         "import": "Import",
         "export": "Export"
     },
+    "dashboard": {
+        "welcome": "Welcome back",
+        "overview_subtitle": "Here's what's happening with your ads today.",
+        "recent_activity": "Recent Activity",
+        "view_all": "View All",
+        "quick_tips": "Quick Tips",
+        "no_activity_title": "Get Started",
+        "no_activity": "No recent activity found. Start by creating a campaign!",
+        "no_sites_title": "Start with a Site",
+        "no_sites_desc": "Add your first site to give the AI context for generating better ad copy.",
+        "tip_context_title": "Connect Context",
+        "tip_context_desc": "Add 'Sites' to give AI better context for generation.",
+        "tip_ai_title": "Generative AI",
+        "tip_ai_desc": "Use the 'Generate' button in Campaigns to create ad copy instantly.",
+        "tip_export_title": "Export Ready",
+        "tip_export_desc": "Export your campaigns directly to Google Ads format when ready."
+    },
     "nav": {
+        "home": "Home",
         "sites": "Sites",
         "campaigns": "Campaigns",
         "adgroups": "Ad Groups",
@@ -14,6 +32,13 @@
         "ads": "Ads",
         "negative_keywords": "Negative Keywords",
         "imprint": "Imprint"
+    },
+    "sites": {
+        "add_first": "Add Your First Site"
+    },
+    "campaigns": {
+        "new": "New Campaign",
+        "create_first": "Create Your First Campaign"
     },
     "site": {
         "id": "ID",
@@ -31,7 +56,8 @@
         "actions": {
             "create": "Load Website",
             "new": "Load Website",
-            "delete": "Delete"
+            "delete": "Delete",
+            "add_first": "Add Your First Site"
         },
         "counts": {
             "site_count": "{{count}} site",
@@ -56,7 +82,8 @@
         "actions": {
             "create": "Create Campaign",
             "new": "New Campaign",
-            "delete": "Delete"
+            "delete": "Delete",
+            "create_first": "Create Your First Campaign"
         },
         "counts": {
             "campaign_count": "{{count}} campaign",
@@ -401,6 +428,11 @@
         "actions": {
             "create": "Load Site",
             "cancel": "Cancel"
+        },
+        "success": {
+            "title": "Site Created!",
+            "message": "is ready. What would you like to do next?",
+            "create_campaign": "Create a Campaign"
         }
     },
     "import": {

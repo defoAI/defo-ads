@@ -17,6 +17,7 @@ import CreateSiteDialog from '../components/CreateSiteDialog';
 import { useNavigate } from 'react-router-dom';
 import { trackPageView, trackSiteDeleted } from '../services/analyticsService';
 import EmptyState from '../components/EmptyState';
+import CreateCampaignDialog from '../components/CreateCampaignDialog';
 import { useTranslation } from 'react-i18next';
 
 const SitesView = () => {
@@ -24,7 +25,15 @@ const SitesView = () => {
     const navigate = useNavigate();
     const [selectionModel, setSelectionModel] = useState({ type: 'include', ids: new Set() });
     const [createDialogOpen, setCreateDialogOpen] = useState(false);
+    const [campaignDialogOpen, setCampaignDialogOpen] = useState(false);
+    const [preselectedSiteId, setPreselectedSiteId] = useState(null);
     const { sites, deleteSites } = useAdsStore();
+
+    // Handler to open campaign dialog after site creation
+    const handleSiteCreatedGoToCampaign = (siteId) => {
+        setPreselectedSiteId(siteId);
+        setCampaignDialogOpen(true);
+    };
 
     // Track page view
     useEffect(() => {
@@ -66,7 +75,18 @@ const SitesView = () => {
     if (rows.length === 0) {
         return (
             <Box sx={{ width: '100%' }}>
-                <CreateSiteDialog open={createDialogOpen} onClose={() => setCreateDialogOpen(false)} />
+                <CreateSiteDialog
+                    open={createDialogOpen}
+                    onClose={() => setCreateDialogOpen(false)}
+                    onCreateCampaign={handleSiteCreatedGoToCampaign}
+                />
+                <CreateCampaignDialog
+                    open={campaignDialogOpen}
+                    onClose={() => {
+                        setCampaignDialogOpen(false);
+                        setPreselectedSiteId(null);
+                    }}
+                />
 
                 <EmptyState
                     icon={<EmptyIcon />}
@@ -84,9 +104,12 @@ const SitesView = () => {
                             startIcon={<AddIcon />}
                             onClick={() => setCreateDialogOpen(true)}
                             sx={{
-                                background: 'linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)',
+                                borderRadius: 2,
+                                textTransform: 'none',
+                                fontWeight: 600,
+                                boxShadow: 'none',
                                 '&:hover': {
-                                    background: 'linear-gradient(135deg, #1565c0 0%, #1976d2 100%)',
+                                    boxShadow: '0 4px 12px rgba(25, 118, 210, 0.25)',
                                 },
                             }}
                         >
@@ -100,7 +123,18 @@ const SitesView = () => {
 
     return (
         <Box sx={{ width: '100%' }}>
-            <CreateSiteDialog open={createDialogOpen} onClose={() => setCreateDialogOpen(false)} />
+            <CreateSiteDialog
+                open={createDialogOpen}
+                onClose={() => setCreateDialogOpen(false)}
+                onCreateCampaign={handleSiteCreatedGoToCampaign}
+            />
+            <CreateCampaignDialog
+                open={campaignDialogOpen}
+                onClose={() => {
+                    setCampaignDialogOpen(false);
+                    setPreselectedSiteId(null);
+                }}
+            />
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
                 <Typography variant="body2" color="text.secondary">
@@ -122,9 +156,12 @@ const SitesView = () => {
                         startIcon={<AddIcon />}
                         onClick={() => setCreateDialogOpen(true)}
                         sx={{
-                            background: 'linear-gradient(135deg, #1976d2 0%, #42a5f5 100%)',
+                            borderRadius: 2,
+                            textTransform: 'none',
+                            fontWeight: 600,
+                            boxShadow: 'none',
                             '&:hover': {
-                                background: 'linear-gradient(135deg, #1565c0 0%, #1976d2 100%)',
+                                boxShadow: '0 4px 12px rgba(25, 118, 210, 0.25)',
                             },
                         }}
                     >

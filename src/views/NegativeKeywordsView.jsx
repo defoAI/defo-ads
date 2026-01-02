@@ -1,4 +1,8 @@
 // File: src/views/NegativeKeywordsView.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Negative keywords management view with list editor and conflict detection.
+
 import React, { useState } from 'react';
 import {
     Box,
@@ -113,7 +117,20 @@ const ListsManager = () => {
 
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                 <Typography variant="h6">{t('negative_keywords.lists.custom_lists')}</Typography>
-                <Button variant="contained" startIcon={<AddIcon />} onClick={handleOpenCreate}>
+                <Button
+                    variant="contained"
+                    startIcon={<AddIcon />}
+                    onClick={handleOpenCreate}
+                    sx={{
+                        borderRadius: 2,
+                        textTransform: 'none',
+                        fontWeight: 600,
+                        boxShadow: 'none',
+                        '&:hover': {
+                            boxShadow: '0 4px 12px rgba(25, 118, 210, 0.25)',
+                        },
+                    }}
+                >
                     {t('negative_keywords.lists.create_list')}
                 </Button>
             </Box>
@@ -197,7 +214,20 @@ const ConflictDetector = () => {
     return (
         <Box sx={{ mt: 2 }}>
             <Box sx={{ mb: 3, textAlign: 'center' }}>
-                <Button variant="contained" size="large" onClick={runCheck}>
+                <Button
+                    variant="contained"
+                    size="large"
+                    onClick={runCheck}
+                    sx={{
+                        borderRadius: 2,
+                        textTransform: 'none',
+                        fontWeight: 600,
+                        boxShadow: 'none',
+                        '&:hover': {
+                            boxShadow: '0 4px 12px rgba(25, 118, 210, 0.25)',
+                        },
+                    }}
+                >
                     {t('negative_keywords.conflicts.run_check')}
                 </Button>
             </Box>

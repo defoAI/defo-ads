@@ -1,3 +1,8 @@
+// File: src/views/AdDetail/AdTranslateTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// AI-powered ad translation tab for multi-language campaigns.
+
 import React from 'react';
 import {
     Box,

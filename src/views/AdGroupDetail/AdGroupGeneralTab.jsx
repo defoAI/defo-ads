@@ -1,3 +1,8 @@
+// File: src/views/AdGroupDetail/AdGroupGeneralTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Ad group general settings and configuration tab.
+
 import React from 'react';
 import {
     Box,

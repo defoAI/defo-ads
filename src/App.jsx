@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import MainLayout from './components/MainLayout';
+import DashboardView from './views/DashboardView';
 import CampaignsView from './views/CampaignsView';
 import CampaignDetailView from './views/CampaignDetailView';
 import AdGroupDetailView from './views/AdGroupDetailView';
@@ -44,8 +45,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainLayout darkMode={darkMode} setDarkMode={setDarkMode} />}>
-            {/* Default redirect */}
-            <Route index element={<Navigate to="/sites" replace />} />
+
+            <Route index element={<DashboardView />} />
 
             {/* Campaigns */}
             <Route path="campaigns" element={<CampaignsView />} />

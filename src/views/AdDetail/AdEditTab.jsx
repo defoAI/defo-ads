@@ -1,3 +1,8 @@
+// File: src/views/AdDetail/AdEditTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Ad edit form tab with headline, description, and settings fields.
+
 import React from 'react';
 import {
     Box,

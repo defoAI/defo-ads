@@ -1,4 +1,8 @@
 // File: src/views/ImprintView.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Legal imprint view displaying company information.
+
 import React from 'react';
 import { Box, Typography, Link } from '@mui/material';
 

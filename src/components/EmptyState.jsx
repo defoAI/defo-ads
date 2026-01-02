@@ -1,5 +1,10 @@
+// File: src/components/EmptyState.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Reusable empty state component with consistent styling for list views.
+
 import React from 'react';
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Typography, Paper, Avatar, alpha, useTheme } from '@mui/material';
 
 /**
  * A reusable empty state component with consistent styling.
@@ -10,22 +15,34 @@ import { Box, Typography, Paper } from '@mui/material';
  * @param {React.ReactNode} actions - Optional buttons or actions to display below the text.
  */
 const EmptyState = ({ icon, title, description, features, actions }) => {
+    const theme = useTheme();
+
     return (
         <Paper
+            elevation={0}
             sx={{
                 p: 6,
                 textAlign: 'center',
-                borderRadius: 3,
-                background: (theme) =>
-                    theme.palette.mode === 'dark'
-                        ? 'linear-gradient(135deg, rgba(25,118,210,0.1) 0%, rgba(66,165,245,0.05) 100%)'
-                        : 'linear-gradient(135deg, rgba(25,118,210,0.05) 0%, rgba(66,165,245,0.02) 100%)',
+                borderRadius: 2,
+                bgcolor: 'background.paper',
+                border: '1px solid',
+                borderColor: 'divider',
                 width: '100%',
             }}
         >
-            <Box sx={{ mb: 2, '& > svg': { fontSize: 80, color: 'primary.main', opacity: 0.6 } }}>
+            <Avatar
+                sx={{
+                    width: 80,
+                    height: 80,
+                    bgcolor: alpha(theme.palette.primary.main, 0.1),
+                    color: 'primary.main',
+                    mx: 'auto',
+                    mb: 3,
+                    '& > svg': { fontSize: 40 }
+                }}
+            >
                 {icon}
-            </Box>
+            </Avatar>
             <Typography variant="h5" sx={{ mb: 1, fontWeight: 600 }}>
                 {title}
             </Typography>
@@ -42,15 +59,15 @@ const EmptyState = ({ icon, title, description, features, actions }) => {
                     mx: 'auto',
                     mb: 4,
                     gap: 1.5,
-                    textAlign: 'left' // Override parent's center alignment
+                    textAlign: 'left'
                 }}>
                     {features.map((feature, index) => (
-                        <Box key={index} sx={{ 
-                            display: 'flex', 
-                            alignItems: 'flex-start', 
+                        <Box key={index} sx={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
                             gap: 1.5,
                             width: '100%',
-                            textAlign: 'left' // Ensure left alignment
+                            textAlign: 'left'
                         }}>
                             <Box
                                 component="span"
@@ -60,16 +77,16 @@ const EmptyState = ({ icon, title, description, features, actions }) => {
                                     borderRadius: '50%',
                                     bgcolor: 'primary.main',
                                     flexShrink: 0,
-                                    mt: 0.5, // Slight top margin to align with first line of text
+                                    mt: 0.75,
                                 }}
                             />
-                            <Typography 
-                                variant="body2" 
+                            <Typography
+                                variant="body2"
                                 color="text.primary"
                                 sx={{
                                     flex: 1,
                                     lineHeight: 1.5,
-                                    textAlign: 'left' // Explicitly set left alignment
+                                    textAlign: 'left'
                                 }}
                             >
                                 {feature}
@@ -89,3 +106,4 @@ const EmptyState = ({ icon, title, description, features, actions }) => {
 };
 
 export default EmptyState;
+

@@ -55,7 +55,13 @@ export const useAdsStore = create(
 
             setCampaigns: (campaigns) => set({ campaigns }),
             addCampaign: async (campaign) => {
-                const newCampaign = { ...campaign, id: campaign.id || crypto.randomUUID() };
+                const now = new Date().toISOString();
+                const newCampaign = {
+                    ...campaign,
+                    id: campaign.id || crypto.randomUUID(),
+                    createdAt: campaign.createdAt || now,
+                    updatedAt: now
+                };
                 // Optimistic Update
                 set({ campaigns: [...get().campaigns, newCampaign] });
 
@@ -72,7 +78,8 @@ export const useAdsStore = create(
             },
             updateCampaign: async (id, updated) => {
                 // Optimistic
-                set({ campaigns: get().campaigns.map(c => c.id === id ? { ...c, ...updated } : c) });
+                const now = new Date().toISOString();
+                set({ campaigns: get().campaigns.map(c => c.id === id ? { ...c, ...updated, updatedAt: now } : c) });
 
                 if (isCloudStorage()) {
                     const campaign = get().campaigns.find(c => c.id === id);
@@ -82,7 +89,13 @@ export const useAdsStore = create(
 
             setSites: (sites) => set({ sites }),
             addSite: async (site) => {
-                const newSite = { ...site, id: site.id || crypto.randomUUID() };
+                const now = new Date().toISOString();
+                const newSite = {
+                    ...site,
+                    id: site.id || crypto.randomUUID(),
+                    createdAt: site.createdAt || now,
+                    updatedAt: now
+                };
                 set({ sites: [...get().sites, newSite] });
                 if (isCloudStorage()) {
                     const saved = await getDataProvider().saveSite(newSite);
@@ -90,7 +103,8 @@ export const useAdsStore = create(
                 }
             },
             updateSite: async (id, updated) => {
-                set({ sites: get().sites.map(s => s.id === id ? { ...s, ...updated } : s) });
+                const now = new Date().toISOString();
+                set({ sites: get().sites.map(s => s.id === id ? { ...s, ...updated, updatedAt: now } : s) });
                 if (isCloudStorage()) {
                     const site = get().sites.find(s => s.id === id);
                     if (site) await getDataProvider().saveSite(site);
@@ -110,7 +124,13 @@ export const useAdsStore = create(
 
             setAdGroups: (adGroups) => set({ adGroups }),
             addAdGroup: async (adGroup) => {
-                const newGroup = { ...adGroup, id: adGroup.id || crypto.randomUUID() };
+                const now = new Date().toISOString();
+                const newGroup = {
+                    ...adGroup,
+                    id: adGroup.id || crypto.randomUUID(),
+                    createdAt: adGroup.createdAt || now,
+                    updatedAt: now
+                };
                 set({ adGroups: [...get().adGroups, newGroup] });
                 if (isCloudStorage()) {
                     const saved = await getDataProvider().saveAdGroup(newGroup);
@@ -118,7 +138,8 @@ export const useAdsStore = create(
                 }
             },
             updateAdGroup: async (id, updated) => {
-                set({ adGroups: get().adGroups.map(x => x.id === id ? { ...x, ...updated } : x) });
+                const now = new Date().toISOString();
+                set({ adGroups: get().adGroups.map(x => x.id === id ? { ...x, ...updated, updatedAt: now } : x) });
                 if (isCloudStorage()) {
                     const item = get().adGroups.find(x => x.id === id);
                     if (item) await getDataProvider().saveAdGroup(item);
@@ -127,7 +148,13 @@ export const useAdsStore = create(
 
             setKeywords: (keywords) => set({ keywords }),
             addKeyword: async (keyword) => {
-                const newKw = { ...keyword, id: keyword.id || crypto.randomUUID() };
+                const now = new Date().toISOString();
+                const newKw = {
+                    ...keyword,
+                    id: keyword.id || crypto.randomUUID(),
+                    createdAt: keyword.createdAt || now,
+                    updatedAt: now
+                };
                 set({ keywords: [...get().keywords, newKw] });
                 if (isCloudStorage()) {
                     const saved = await getDataProvider().saveKeyword(newKw);
@@ -135,7 +162,8 @@ export const useAdsStore = create(
                 }
             },
             updateKeyword: async (id, updated) => {
-                set({ keywords: get().keywords.map(x => x.id === id ? { ...x, ...updated } : x) });
+                const now = new Date().toISOString();
+                set({ keywords: get().keywords.map(x => x.id === id ? { ...x, ...updated, updatedAt: now } : x) });
                 if (isCloudStorage()) {
                     const item = get().keywords.find(x => x.id === id);
                     if (item) await getDataProvider().saveKeyword(item);
@@ -144,7 +172,13 @@ export const useAdsStore = create(
 
             setAds: (ads) => set({ ads }),
             addAd: async (ad) => {
-                const newAd = { ...ad, id: ad.id || crypto.randomUUID() };
+                const now = new Date().toISOString();
+                const newAd = {
+                    ...ad,
+                    id: ad.id || crypto.randomUUID(),
+                    createdAt: ad.createdAt || now,
+                    updatedAt: now
+                };
                 set({ ads: [...get().ads, newAd] });
                 if (isCloudStorage()) {
                     const saved = await getDataProvider().saveAd(newAd);
@@ -152,7 +186,8 @@ export const useAdsStore = create(
                 }
             },
             updateAd: async (id, updated) => {
-                set({ ads: get().ads.map(x => x.id === id ? { ...x, ...updated } : x) });
+                const now = new Date().toISOString();
+                set({ ads: get().ads.map(x => x.id === id ? { ...x, ...updated, updatedAt: now } : x) });
                 if (isCloudStorage()) {
                     const item = get().ads.find(x => x.id === id);
                     if (item) await getDataProvider().saveAd(item);

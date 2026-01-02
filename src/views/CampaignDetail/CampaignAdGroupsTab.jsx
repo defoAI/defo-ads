@@ -1,3 +1,8 @@
+// File: src/views/CampaignDetail/CampaignAdGroupsTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Campaign ad groups listing tab component.
+
 import React from 'react';
 import { Box } from '@mui/material';
 import EntityListView from '../EntityListView';

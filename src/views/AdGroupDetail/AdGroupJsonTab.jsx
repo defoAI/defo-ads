@@ -1,3 +1,8 @@
+// File: src/views/AdGroupDetail/AdGroupJsonTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// JSON view/edit tab for ad group data.
+
 import React from 'react';
 import { Box, TextField } from '@mui/material';
 

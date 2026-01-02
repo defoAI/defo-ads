@@ -1,3 +1,8 @@
+// File: src/views/CampaignDetail/CampaignKeywordsTab.jsx
+// Copyright (c) 2025 DefoAI UG (haftungsbeschränkt)
+//
+// Campaign keywords listing tab component.
+
 import React from 'react';
 import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';

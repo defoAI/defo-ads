@@ -54,6 +54,7 @@ const drawerWidth = 220;
 
 // Navigation items for the sidebar
 const navItems = [
+    { path: '/', label: 'Home', icon: <HomeIcon />, i18nKey: 'nav.home' },
     { path: '/sites', label: 'Sites', icon: <SiteIcon />, i18nKey: 'nav.sites' },
     { path: '/campaigns', label: 'Campaigns', icon: <CampaignIcon />, i18nKey: 'nav.campaigns' },
     { path: '/adgroups', label: 'Ad Groups', icon: <AdGroupIcon />, i18nKey: 'nav.adgroups' },
