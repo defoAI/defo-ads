@@ -559,6 +559,7 @@ Return a JSON object with:
                             variant="outlined"
                             sx={{ mb: 3 }}
                             autoFocus
+                            data-testid="input-campaign-name"
                         />
 
                         {/* Campaign Type Selection */}
@@ -592,11 +593,16 @@ Return a JSON object with:
                             {t('create_campaign.review.daily_budget')}
                         </Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
-                            <Typography variant="h4" sx={{ fontWeight: 600, color: 'primary.main', minWidth: 90 }}>
-                                €{budget}
-                            </Typography>
-                            <Slider
+                            <TextField
                                 value={budget}
+                                onChange={(e) => setBudget(Number(e.target.value))}
+                                type="number"
+                                InputProps={{ startAdornment: <Box sx={{ mr: 1 }}>€</Box> }}
+                                sx={{ width: 120 }}
+                                data-testid="input-campaign-budget"
+                            />
+                            <Slider
+                                value={typeof budget === 'number' ? budget : 0}
                                 onChange={(e, val) => setBudget(val)}
                                 min={5}
                                 max={500}
@@ -675,6 +681,7 @@ Return a JSON object with:
             fullWidth
             fullScreen={fullScreen}
             TransitionComponent={Fade}
+            data-testid="dialog-create-campaign"
             PaperProps={{
                 sx: {
                     borderRadius: fullScreen ? 0 : 4,
@@ -756,6 +763,7 @@ Return a JSON object with:
                         onClick={handleSubmit}
                         variant="contained"
                         size="large"
+                        data-testid="btn-create-campaign"
                         sx={{
                             px: 4,
                             py: 1.5,

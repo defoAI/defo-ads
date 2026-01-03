@@ -100,7 +100,7 @@ const SettingsView = () => {
         <Box>
             <Paper sx={{ p: 3 }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
-                    <Tabs value={activeTab} onChange={handleTabChange} aria-label="settings tabs">
+                    <Tabs value={activeTab} onChange={handleTabChange} aria-label="settings tabs" data-testid="settings-tabs">
                         <Tab icon={<SettingsIcon />} iconPosition="start" label={t('settings.tabs.general')} />
                         <Tab icon={<PromptIcon />} iconPosition="start" label={t('settings.tabs.prompts')} />
                         <Tab icon={<InfoIcon />} iconPosition="start" label={t('settings.tabs.imprint')} />
@@ -126,11 +126,13 @@ const SettingsView = () => {
                                 onChange={(e) => setOpenaiKey(e.target.value)}
                                 helperText={t('settings.api.openai_key_helper')}
                                 sx={{ mb: 2 }}
+                                data-testid="input-api-key"
                             />
                             <Button
                                 variant="contained"
                                 startIcon={<SaveIcon />}
                                 onClick={handleSave}
+                                data-testid="btn-save-api-key"
                                 sx={{
                                     borderRadius: 2,
                                     textTransform: 'none',
@@ -171,6 +173,7 @@ const SettingsView = () => {
                                             trackSettingChanged('askForCustomInstructions', e.target.checked);
                                         }}
                                         color="primary"
+                                        data-testid="switch-custom-instructions"
                                     />
                                 }
                                 label={t('settings.ai_behavior.custom_instructions_label')}
@@ -209,6 +212,7 @@ const SettingsView = () => {
                                 color="error"
                                 startIcon={<ClearIcon />}
                                 onClick={() => setClearDialogOpen(true)}
+                                data-testid="btn-clear-data"
                             >
                                 {t('settings.data_management.clear_all')}
                             </Button>

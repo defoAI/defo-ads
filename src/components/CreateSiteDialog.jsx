@@ -167,6 +167,7 @@ const CreateSiteDialog = ({ open, onClose, onCreateCampaign }) => {
             fullWidth
             fullScreen={fullScreen}
             TransitionComponent={Fade}
+            data-testid="dialog-add-site"
             PaperProps={{
                 sx: {
                     borderRadius: fullScreen ? 0 : 4,
@@ -267,6 +268,7 @@ const CreateSiteDialog = ({ open, onClose, onCreateCampaign }) => {
                             variant="outlined"
                             sx={{ mb: 1 }}
                             autoFocus
+                            data-testid="input-site-url"
                         />
 
                         {/* AI Generation Section - prominent like CreateCampaignDialog */}
@@ -291,6 +293,7 @@ const CreateSiteDialog = ({ open, onClose, onCreateCampaign }) => {
                             placeholder={t('create_site.site_name_placeholder')}
                             variant="outlined"
                             sx={{ mb: 2 }}
+                            data-testid="input-site-name"
                         />
 
                         {/* Description */}
@@ -329,6 +332,7 @@ const CreateSiteDialog = ({ open, onClose, onCreateCampaign }) => {
                         onClick={handleSubmit}
                         variant="contained"
                         size="large"
+                        data-testid="btn-create-site"
                         sx={{
                             flex: 2,
                             py: 1.5,

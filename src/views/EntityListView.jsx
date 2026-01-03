@@ -447,6 +447,7 @@ Return a JSON array of keywords with fields:
                         variant="outlined"
                         startIcon={<ImportIcon />}
                         onClick={() => setImportDialogOpen(true)}
+                        data-testid="btn-import-entity"
                     >
                         {t('common.import')}
                     </Button>
@@ -456,6 +457,7 @@ Return a JSON array of keywords with fields:
                             color="error"
                             startIcon={<DeleteIcon />}
                             onClick={handleDelete}
+                            data-testid="btn-delete-selected"
                         >
                             {t('common.delete')} ({selectedCount})
                         </Button>
@@ -466,12 +468,13 @@ Return a JSON array of keywords with fields:
                         label={t(`${type}.actions.add_ai`)}
                         variant="outlined"
                         size="small"
+                        data-testid="btn-ai-generate"
                     />
                 </Stack>
             </Box>
 
             {/* AI Generation Dialog */}
-            <Dialog open={aiDialogOpen} onClose={() => setAiDialogOpen(false)} maxWidth="sm" fullWidth>
+            <Dialog open={aiDialogOpen} onClose={() => setAiDialogOpen(false)} maxWidth="sm" fullWidth data-testid="dialog-ai-generate">
                 <DialogTitle sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <AiIcon color="primary" /> {t('entity_list.dialog.generate_title', { type: title })}
                 </DialogTitle>
@@ -487,6 +490,7 @@ Return a JSON array of keywords with fields:
                                 value={selectedCampaign}
                                 onChange={(e) => setSelectedCampaign(e.target.value)}
                                 label={t('entity_list.dialog.campaign')}
+                                data-testid="filter-campaign-select"
                             >
                                 {store.campaigns.map(c => (
                                     <MenuItem key={c.id} value={c.id}>{c.Campaign}</MenuItem>
@@ -502,6 +506,7 @@ Return a JSON array of keywords with fields:
                                 value={selectedAdGroup}
                                 onChange={(e) => setSelectedAdGroup(e.target.value)}
                                 label={t('entity_list.dialog.ad_group')}
+                                data-testid="filter-adgroup-select"
                             >
                                 {store.adGroups.map(ag => (
                                     <MenuItem key={ag.id} value={ag.id}>{ag['Ad Group']} ({ag.Campaign})</MenuItem>
@@ -524,6 +529,7 @@ Return a JSON array of keywords with fields:
                         label={t('common.generate')}
                         variant="contained"
                         placeholder={`e.g., Focus on ${type === 'keyword' ? 'long-tail keywords' : 'mobile users'}...`}
+                        data-testid="btn-ai-generate-confirm"
                     />
                 </DialogActions>
             </Dialog>
@@ -551,6 +557,7 @@ Return a JSON array of keywords with fields:
                         expand: true,
                     }}
                     sx={{ border: 0, cursor: type === 'ad' ? 'pointer' : 'default' }}
+                    data-testid="entity-table"
                 />
             </Paper>
             <ImportDialog open={importDialogOpen} onClose={() => setImportDialogOpen(false)} />

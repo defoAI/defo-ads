@@ -91,6 +91,7 @@ const SitesView = () => {
                             size="large"
                             startIcon={<AddIcon />}
                             onClick={() => setCreateDialogOpen(true)}
+                            data-testid="btn-add-site"
                             sx={{
                                 borderRadius: 2,
                                 textTransform: 'none',
@@ -143,6 +144,7 @@ const SitesView = () => {
                         variant="contained"
                         startIcon={<AddIcon />}
                         onClick={() => setCreateDialogOpen(true)}
+                        data-testid="btn-add-site"
                         sx={{
                             borderRadius: 2,
                             textTransform: 'none',

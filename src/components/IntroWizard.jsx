@@ -251,6 +251,7 @@ const IntroWizard = ({ open, onClose }) => {
             open={open}
             maxWidth="sm"
             fullWidth
+            data-testid="wizard-container"
             PaperProps={{
                 sx: {
                     borderRadius: 3,
@@ -269,7 +270,7 @@ const IntroWizard = ({ open, onClose }) => {
                 )}
             </DialogTitle>
 
-            <DialogContent sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <DialogContent sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }} data-testid={`wizard-step-${activeStep}`}>
                 {renderStepContent(activeStep)}
             </DialogContent>
 
@@ -287,6 +288,7 @@ const IntroWizard = ({ open, onClose }) => {
                         disabled={activeStep === 0}
                         onClick={handleBack}
                         startIcon={<NavigateBefore />}
+                        data-testid="wizard-btn-back"
                     >
                         {t('intro_wizard.actions.back')}
                     </Button>
@@ -296,6 +298,7 @@ const IntroWizard = ({ open, onClose }) => {
                         disabled={!canProceed()}
                         endIcon={activeStep === steps.length - 1 ? <CheckIcon /> : <NavigateNext />}
                         size="large"
+                        data-testid="wizard-btn-next"
                         sx={{ px: 4, borderRadius: 2 }}
                     >
                         {activeStep === steps.length - 1 ? t('intro_wizard.actions.get_started') : t('intro_wizard.actions.next')}
