@@ -3,7 +3,7 @@
 //
 // Reusable button component that opens a popover for custom AI instructions
 // before triggering the generation action.
-// Now includes friendly API key missing guidance.
+// Open Source Version: Simple BYO Key only.
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -43,12 +43,8 @@ const AiAssistButton = ({
     const [showApiKeyPrompt, setShowApiKeyPrompt] = useState(false);
 
     const askForCustomInstructions = useAdsStore((state) => state.settings?.askForCustomInstructions ?? false);
-    const useServerAI = useAdsStore((state) => state.settings?.useServerAI ?? false);
 
     const checkApiKey = () => {
-        // If Server AI is enabled, we assume the backend handles auth/limits
-        if (useServerAI) return true;
-
         const apiKey = localStorage.getItem('openai_api_key');
         return apiKey && apiKey.trim().length > 0;
     };
@@ -58,11 +54,9 @@ const AiAssistButton = ({
             setShowApiKeyPrompt(true);
             setAnchorEl(event.currentTarget);
         } else if (askForCustomInstructions) {
-            // Show popover for custom instructions
             setShowApiKeyPrompt(false);
             setAnchorEl(event.currentTarget);
         } else {
-            // Skip popover and generate directly
             if (onGenerate) {
                 await onGenerate('');
             }
@@ -109,9 +103,7 @@ const AiAssistButton = ({
                         boxShadow: '0 6px 20px 0 rgba(102, 126, 234, 0.45)',
                         transform: 'translateY(-1px)',
                     },
-                    '&:active': {
-                        transform: 'translateY(0)',
-                    },
+                    '&:active': { transform: 'translateY(0)' },
                     transition: 'all 0.2s ease-in-out',
                 } : {
                     color: '#667eea',
@@ -126,9 +118,7 @@ const AiAssistButton = ({
                         background: 'rgba(102, 126, 234, 0.08)',
                         transform: 'translateY(-1px)',
                     },
-                    '&:active': {
-                        transform: 'translateY(0)',
-                    },
+                    '&:active': { transform: 'translateY(0)' },
                     transition: 'all 0.2s ease-in-out',
                 }}
             >
@@ -140,20 +130,11 @@ const AiAssistButton = ({
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left',
-                }}
-                PaperProps={{
-                    sx: { width: 340, p: 2.5, borderRadius: 2 }
-                }}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+                PaperProps={{ sx: { width: 340, p: 2.5, borderRadius: 2 } }}
             >
                 {showApiKeyPrompt ? (
-                    // API Key Missing View
                     <Box sx={{ textAlign: 'center' }}>
                         <KeyIcon sx={{ fontSize: 48, color: '#667eea', mb: 1.5 }} />
                         <Typography variant="h6" sx={{ fontWeight: 600, mb: 1 }}>
@@ -162,7 +143,6 @@ const AiAssistButton = ({
                         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
                             {t('ai_assist.api_key_description')}
                         </Typography>
-
                         <Button
                             fullWidth
                             variant="contained"
@@ -171,29 +151,19 @@ const AiAssistButton = ({
                             sx={{
                                 mb: 1.5,
                                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                                color: 'white',
-                                fontWeight: 600,
-                                textTransform: 'none',
-                                py: 1.2,
+                                color: 'white', fontWeight: 600, textTransform: 'none', py: 1.2,
                             }}
                         >
                             {t('ai_assist.go_to_settings')}
                         </Button>
-
                         <Typography variant="caption" color="text.secondary">
                             {t('ai_assist.no_key')}{' '}
-                            <Link
-                                href="https://platform.openai.com/api-keys"
-                                target="_blank"
-                                rel="noopener"
-                                sx={{ color: '#667eea' }}
-                            >
+                            <Link href="https://platform.openai.com/api-keys" target="_blank" rel="noopener" sx={{ color: '#667eea' }}>
                                 {t('ai_assist.get_key')}
                             </Link>
                         </Typography>
                     </Box>
                 ) : (
-                    // Normal Instructions View
                     <>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
                             <Typography variant="subtitle2" sx={{ fontWeight: 700, display: 'flex', alignItems: 'center', gap: 1, color: '#667eea' }}>
@@ -203,51 +173,24 @@ const AiAssistButton = ({
                                 <CloseIcon fontSize="small" />
                             </IconButton>
                         </div>
-
                         <Typography variant="caption" color="text.secondary" paragraph sx={{ mb: 2 }}>
                             {t('ai_assist.instructions_description')}
                         </Typography>
-
                         <TextField
-                            fullWidth
-                            multiline
-                            rows={3}
-                            variant="outlined"
-                            size="small"
-                            placeholder={placeholder}
-                            value={instructions}
+                            fullWidth multiline rows={3} variant="outlined" size="small"
+                            placeholder={placeholder} value={instructions}
                             onChange={(e) => setInstructions(e.target.value)}
-                            sx={{
-                                mb: 2,
-                                '& .MuiOutlinedInput-root': {
-                                    '&:hover fieldset': {
-                                        borderColor: '#667eea',
-                                    },
-                                    '&.Mui-focused fieldset': {
-                                        borderColor: '#667eea',
-                                    },
-                                }
-                            }}
+                            sx={{ mb: 2, '& .MuiOutlinedInput-root': { '&:hover fieldset': { borderColor: '#667eea' }, '&.Mui-focused fieldset': { borderColor: '#667eea' } } }}
                             autoFocus
                         />
-
                         <Button
-                            fullWidth
-                            variant="contained"
-                            onClick={handleGenerate}
-                            disabled={isGenerating}
+                            fullWidth variant="contained" onClick={handleGenerate} disabled={isGenerating}
                             startIcon={<AiIcon />}
                             sx={{
                                 background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                                color: 'white',
-                                fontWeight: 600,
-                                textTransform: 'none',
-                                py: 1.2,
+                                color: 'white', fontWeight: 600, textTransform: 'none', py: 1.2,
                                 boxShadow: '0 4px 14px 0 rgba(102, 126, 234, 0.35)',
-                                '&:hover': {
-                                    background: 'linear-gradient(135deg, #5568d3 0%, #653a8b 100%)',
-                                    boxShadow: '0 6px 20px 0 rgba(102, 126, 234, 0.45)',
-                                }
+                                '&:hover': { background: 'linear-gradient(135deg, #5568d3 0%, #653a8b 100%)', boxShadow: '0 6px 20px 0 rgba(102, 126, 234, 0.45)' }
                             }}
                         >
                             {t('common.generate')}
