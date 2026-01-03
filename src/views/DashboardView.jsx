@@ -51,12 +51,13 @@ const fadeInUp = keyframes`
     }
 `;
 
-const StatCard = ({ title, count, icon, color, onClick, delay = 0 }) => {
+const StatCard = ({ title, count, icon, color, onClick, delay = 0, testId }) => {
     const theme = useTheme();
 
     return (
         <Paper
             elevation={0}
+            data-testid={testId}
             sx={{
                 p: 3,
                 display: 'flex',
@@ -211,6 +212,7 @@ const DashboardView = () => {
                 <Button
                     variant="contained"
                     size="large"
+                    data-testid="btn-cta-primary"
                     startIcon={hasSites ? <AddIcon /> : <SiteIcon />}
                     onClick={() => navigate(hasSites ? '/campaigns' : '/sites')}
                     sx={{
@@ -241,6 +243,7 @@ const DashboardView = () => {
                         color="primary"
                         onClick={() => navigate('/campaigns')}
                         delay={0.05}
+                        testId="stat-campaigns"
                     />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
@@ -251,6 +254,7 @@ const DashboardView = () => {
                         color="secondary"
                         onClick={() => navigate('/ads')}
                         delay={0.1}
+                        testId="stat-ads"
                     />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
@@ -261,6 +265,7 @@ const DashboardView = () => {
                         color="success"
                         onClick={() => navigate('/sites')}
                         delay={0.15}
+                        testId="stat-sites"
                     />
                 </Grid>
                 <Grid item xs={12} sm={6} md={3}>
@@ -271,6 +276,7 @@ const DashboardView = () => {
                         color="warning"
                         onClick={() => navigate('/keywords')}
                         delay={0.2}
+                        testId="stat-keywords"
                     />
                 </Grid>
             </Grid>
@@ -280,6 +286,7 @@ const DashboardView = () => {
                 <Grid item xs={12} lg={8}>
                     <Paper
                         elevation={0}
+                        data-testid="recent-activity"
                         sx={{
                             border: '1px solid',
                             borderColor: 'divider',
@@ -437,6 +444,7 @@ const DashboardView = () => {
                 <Grid item xs={12} lg={4}>
                     <Paper
                         elevation={0}
+                        data-testid="quick-tips"
                         sx={{
                             p: 2.5,
                             border: '1px solid',

@@ -151,6 +151,7 @@ const CampaignsView = () => {
                         <Button
                             variant="contained"
                             size="large"
+                            data-testid="btn-new-campaign"
                             startIcon={<AddIcon />}
                             onClick={() => setCreateDialogOpen(true)}
                             sx={{
@@ -191,6 +192,7 @@ const CampaignsView = () => {
                         <Button
                             variant="outlined"
                             color="error"
+                            data-testid="btn-delete-selected"
                             startIcon={<DeleteIcon />}
                             onClick={handleDelete}
                             fullWidth
@@ -200,6 +202,7 @@ const CampaignsView = () => {
                     )}
                     <Button
                         variant="contained"
+                        data-testid="btn-new-campaign"
                         startIcon={<AddIcon />}
                         onClick={() => setCreateDialogOpen(true)}
                         sx={{
@@ -217,7 +220,7 @@ const CampaignsView = () => {
                     </Button>
                 </Box>
             </Box>
-            <Paper sx={{ width: '100%', borderRadius: 2 }}>
+            <Paper sx={{ width: '100%', borderRadius: 2 }} data-testid="campaigns-grid">
                 <DataGrid
                     rows={rows}
                     columns={columns}
