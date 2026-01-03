@@ -346,6 +346,7 @@ const MainLayout = ({ darkMode, setDarkMode }) => {
                             <GitHubIcon />
                         </IconButton>
                     </Tooltip>
+
                     <Tooltip title={darkMode ? t('navigation.switch_to_light_mode') : t('navigation.switch_to_dark_mode')}>
                         <IconButton onClick={() => setDarkMode(!darkMode)} color="inherit">
                             {darkMode ? <LightModeIcon /> : <DarkModeIcon />}

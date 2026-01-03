@@ -55,18 +55,6 @@ const SitesView = () => {
         { field: 'id', headerName: t('site.id'), width: 70 },
         { field: 'name', headerName: t('site.name'), flex: 1, minWidth: 150 },
         { field: 'url', headerName: t('site.url'), flex: 1, minWidth: 200 },
-        {
-            field: 'description',
-            headerName: t('site.description'),
-            flex: 2,
-            minWidth: 250,
-            renderCell: (params) => (
-                <span title={params.value} style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {params.value}
-                </span>
-            )
-        },
-        { field: 'seoKeywords', headerName: t('site.keywords'), width: 200 },
     ];
 
     const selectedCount = selectionModel.ids.size;
@@ -169,7 +157,7 @@ const SitesView = () => {
                     </Button>
                 </Box>
             </Box>
-            <Paper sx={{ width: '100%', borderRadius: 2 }}>
+            <Paper sx={{ width: '100%', borderRadius: 2, overflow: 'hidden' }}>
                 <DataGrid
                     rows={rows}
                     columns={columns}
@@ -185,7 +173,6 @@ const SitesView = () => {
                     autosizeOptions={{
                         includeHeaders: true,
                         includeOutliers: true,
-                        expand: true,
                     }}
                     sx={{ border: 0 }}
                 />

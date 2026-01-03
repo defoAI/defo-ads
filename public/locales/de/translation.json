@@ -399,7 +399,8 @@
     "seo_keywords_placeholder": "z.B. Schuhe, Mode, Sommerschlussverkauf",
     "messages": {
       "url_required": "Bitte geben Sie zuerst eine URL ein.",
-      "analysis_failed": "KI-Analyse fehlgeschlagen. Bitte versuchen Sie es erneut oder füllen Sie die Daten manuell aus."
+      "analysis_failed": "KI-Analyse fehlgeschlagen. Bitte versuchen Sie es erneut oder füllen Sie die Daten manuell aus.",
+      "duplicate_domain": "Eine Seite mit der Domain \"{{domain}}\" existiert bereits. Bitte verwenden Sie eine andere URL."
     },
     "actions": {
       "create": "Website laden",
@@ -689,5 +690,24 @@
   },
   "sites": {
     "add_first": "Fügen Sie Ihre erste Website hinzu"
+  },
+  "sync": {
+    "status_title": "Sync-Status",
+    "syncing": "Synchronisiere...",
+    "synced": "Alles synchronisiert",
+    "error": "Synchronisierung fehlgeschlagen",
+    "idle": "Inaktiv",
+    "never": "Nie",
+    "just_now": "Gerade eben",
+    "minutes_ago": "vor {{minutes}} Min.",
+    "hours_ago": "vor {{hours}} Std.",
+    "pending_count": "{{count}} ausstehend",
+    "last_sync": "Zuletzt: {{time}}",
+    "failed_items": "{{count}} fehlgeschlagen",
+    "retry_all": "Alle erneut versuchen",
+    "clear_all": "Alle löschen",
+    "unknown_error": "Unbekannter Fehler",
+    "and_more": "...und {{count}} weitere",
+    "processing": "{{count}} Elemente werden verarbeitet..."
   }
 }

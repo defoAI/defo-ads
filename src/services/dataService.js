@@ -13,19 +13,24 @@
  * @typedef {Object} DataProvider
  * @property {'cloud'|'hybrid'} type - Provider type
  * @property {() => Promise<Object[]>} getCampaigns
- * @property {(data: Object) => Promise<Object>} saveCampaign
+ * @property {(data: Object) => Promise<Object>} createCampaign
+ * @property {(data: Object) => Promise<Object>} updateCampaign
  * @property {(ids: string[]) => Promise<void>} deleteCampaigns
  * @property {() => Promise<Object[]>} getAdGroups
- * @property {(data: Object) => Promise<Object>} saveAdGroup
+ * @property {(data: Object) => Promise<Object>} createAdGroup
+ * @property {(data: Object) => Promise<Object>} updateAdGroup
  * @property {(ids: string[]) => Promise<void>} deleteAdGroups
  * @property {() => Promise<Object[]>} getKeywords
- * @property {(data: Object) => Promise<Object>} saveKeyword
+ * @property {(data: Object) => Promise<Object>} createKeyword
+ * @property {(data: Object) => Promise<Object>} updateKeyword
  * @property {(ids: string[]) => Promise<void>} deleteKeywords
  * @property {() => Promise<Object[]>} getAds
- * @property {(data: Object) => Promise<Object>} saveAd
+ * @property {(data: Object) => Promise<Object>} createAd
+ * @property {(data: Object) => Promise<Object>} updateAd
  * @property {(ids: string[]) => Promise<void>} deleteAds
  * @property {() => Promise<Object[]>} getSites
- * @property {(data: Object) => Promise<Object>} saveSite
+ * @property {(data: Object) => Promise<Object>} createSite
+ * @property {(data: Object) => Promise<Object>} updateSite
  * @property {(ids: string[]) => Promise<void>} deleteSites
  * @property {(localData: Object) => Promise<void>} migrateFromLocal - Migrate localStorage data to cloud
  */

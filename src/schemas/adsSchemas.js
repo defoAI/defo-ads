@@ -7,13 +7,13 @@ import { z } from 'zod';
  * Zod Schema for a Google Ads Campaign row (simplified for MVP)
  */
 export const CampaignSchema = z.object({
-    'Campaign': z.string().min(1, "Campaign name is required"),
-    'Budget': z.number().positive("Budget must be positive"),
-    'Campaign Type': z.enum(['Search', 'Display', 'Video', 'Shopping', 'Discovery', 'Performance Max']).default('Search'),
-    'Status': z.enum(['Enabled', 'Paused', 'Removed']).default('Paused'),
-    'Networks': z.string().optional(),
-    'Languages': z.string().default('en'),
-    'siteId': z.string().optional(), // Link to a Site configuration
+    campaign: z.string().min(1, "Campaign name is required"),
+    budget: z.number().positive("Budget must be positive"),
+    type: z.enum(['Search', 'Display', 'Video', 'Shopping', 'Discovery', 'Performance Max']).default('Search'),
+    status: z.enum(['Enabled', 'Paused', 'Removed']).default('Paused'),
+    networks: z.string().optional(),
+    languages: z.string().default('en'),
+    siteId: z.string().optional(), // Link to a Site configuration
 });
 
 /**
@@ -45,22 +45,22 @@ export const PromptSchema = z.object({
  * Zod Schema for an Ad Group row
  */
 export const AdGroupSchema = z.object({
-    'Campaign': z.string().min(1),
-    'Ad Group': z.string().min(1, "Ad Group name is required"),
-    'Max CPC': z.number().optional(),
-    'Ad Group Type': z.string().default('Standard'),
-    'Status': z.enum(['Enabled', 'Paused', 'Removed']).default('Enabled'),
+    campaign: z.string().min(1),
+    adGroup: z.string().min(1, "Ad Group name is required"),
+    maxCpc: z.number().optional(),
+    type: z.string().default('Standard'),
+    status: z.enum(['Enabled', 'Paused', 'Removed']).default('Enabled'),
 });
 
 /**
  * Zod Schema for a Keyword
  */
 export const KeywordSchema = z.object({
-    'Campaign': z.string().min(1),
-    'Ad Group': z.string().min(1),
-    'Keyword': z.string().min(1),
-    'Criterion Type': z.enum(['Broad', 'Phrase', 'Exact']).default('Broad'),
-    'Status': z.enum(['Enabled', 'Paused', 'Removed']).default('Enabled'),
+    campaign: z.string().min(1),
+    adGroup: z.string().min(1),
+    text: z.string().min(1),
+    matchType: z.enum(['Broad', 'Phrase', 'Exact']).default('Broad'),
+    status: z.enum(['Enabled', 'Paused', 'Removed']).default('Enabled'),
 });
 
 /**
@@ -68,14 +68,14 @@ export const KeywordSchema = z.object({
  * Enforces character limits: Headlines (30), Descriptions (90)
  */
 export const AdSchema = z.object({
-    'Campaign': z.string().min(1),
-    'Ad Group': z.string().min(1),
-    'Headline 1': z.string().max(30, "Headline 1 max 30 chars"),
-    'Headline 2': z.string().max(30, "Headline 2 max 30 chars"),
-    'Headline 3': z.string().max(30, "Headline 3 max 30 chars").optional(),
-    'Description 1': z.string().max(90, "Description 1 max 90 chars"),
-    'Description 2': z.string().max(90, "Description 2 max 90 chars").optional(),
-    'Final URL': z.string().url("Must be a valid URL"),
-    'Path 1': z.string().max(15).optional(),
-    'Path 2': z.string().max(15).optional(),
+    campaign: z.string().min(1),
+    adGroup: z.string().min(1),
+    headline1: z.string().max(30, "Headline 1 max 30 chars"),
+    headline2: z.string().max(30, "Headline 2 max 30 chars"),
+    headline3: z.string().max(30, "Headline 3 max 30 chars").optional(),
+    description1: z.string().max(90, "Description 1 max 90 chars"),
+    description2: z.string().max(90, "Description 2 max 90 chars").optional(),
+    finalUrl: z.string().url("Must be a valid URL"),
+    path1: z.string().max(15).optional(),
+    path2: z.string().max(15).optional(),
 });

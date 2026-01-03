@@ -102,6 +102,15 @@ See exactly how your ads will appear in Google Search:
 - **Inter-Entity Deep Linking**: Click relationships to navigate directly to related entities
 - **Empty State Guidance**: Helpful prompts guide you from zero to hero
 
+### 🏠 Home Dashboard
+
+A central command center to monitor and navigate your ad campaigns:
+
+- **At-a-Glance Metrics**: Card-based overview of your Campaigns, Ads, Sites, and Keywords counts
+- **Recent Activity Feed**: Quickly access your most recently modified campaigns and sites
+- **Quick Tips Panel**: Contextual guidance to help you get the most out of Defo Ads
+- **Smart Quick Actions**: One-click access to create new campaigns or add your first site
+
 ### 🛡️ Onboarding & Compliance
 
 - **4-Step Intro Wizard**: Welcome → Terms → API Setup → Backup Reminder

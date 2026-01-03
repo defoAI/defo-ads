@@ -67,14 +67,17 @@ export const useAdsStore = create(
 
                 if (isCloudStorage()) {
                     try {
-                        const saved = await getDataProvider().saveCampaign(newCampaign);
+                        const saved = await getDataProvider().createCampaign(newCampaign);
                         // Update with server version (e.g. real ID)
                         set({ campaigns: get().campaigns.map(c => c.id === newCampaign.id ? saved : c) });
+                        return saved;
                     } catch (e) {
                         console.error("Failed to save campaign", e);
                         // Rollback? For now just log.
+                        return newCampaign;
                     }
                 }
+                return newCampaign;
             },
             updateCampaign: async (id, updated) => {
                 // Optimistic
@@ -83,7 +86,7 @@ export const useAdsStore = create(
 
                 if (isCloudStorage()) {
                     const campaign = get().campaigns.find(c => c.id === id);
-                    if (campaign) await getDataProvider().saveCampaign(campaign);
+                    if (campaign) await getDataProvider().updateCampaign(campaign);
                 }
             },
 
@@ -98,16 +101,18 @@ export const useAdsStore = create(
                 };
                 set({ sites: [...get().sites, newSite] });
                 if (isCloudStorage()) {
-                    const saved = await getDataProvider().saveSite(newSite);
+                    const saved = await getDataProvider().createSite(newSite);
                     set({ sites: get().sites.map(s => s.id === newSite.id ? saved : s) });
+                    return saved;
                 }
+                return newSite;
             },
             updateSite: async (id, updated) => {
                 const now = new Date().toISOString();
                 set({ sites: get().sites.map(s => s.id === id ? { ...s, ...updated, updatedAt: now } : s) });
                 if (isCloudStorage()) {
                     const site = get().sites.find(s => s.id === id);
-                    if (site) await getDataProvider().saveSite(site);
+                    if (site) await getDataProvider().updateSite(site);
                 }
             },
 
@@ -133,8 +138,27 @@ export const useAdsStore = create(
                 };
                 set({ adGroups: [...get().adGroups, newGroup] });
                 if (isCloudStorage()) {
-                    const saved = await getDataProvider().saveAdGroup(newGroup);
+                    const saved = await getDataProvider().createAdGroup(newGroup);
                     set({ adGroups: get().adGroups.map(x => x.id === newGroup.id ? saved : x) });
+                    return saved;
+                }
+                return newGroup;
+            },
+            addAdGroups: async (adGroups) => {
+                if (isCloudStorage()) {
+                    const saved = await getDataProvider().createAdGroups(adGroups);
+                    set({ adGroups: [...get().adGroups, ...saved] });
+                    return saved;
+                } else {
+                    const now = new Date().toISOString();
+                    const newItems = adGroups.map(g => ({
+                        ...g,
+                        id: g.id || crypto.randomUUID(),
+                        createdAt: g.createdAt || now,
+                        updatedAt: now
+                    }));
+                    set({ adGroups: [...get().adGroups, ...newItems] });
+                    return newItems;
                 }
             },
             updateAdGroup: async (id, updated) => {
@@ -142,7 +166,7 @@ export const useAdsStore = create(
                 set({ adGroups: get().adGroups.map(x => x.id === id ? { ...x, ...updated, updatedAt: now } : x) });
                 if (isCloudStorage()) {
                     const item = get().adGroups.find(x => x.id === id);
-                    if (item) await getDataProvider().saveAdGroup(item);
+                    if (item) await getDataProvider().updateAdGroup(item);
                 }
             },
 
@@ -157,8 +181,27 @@ export const useAdsStore = create(
                 };
                 set({ keywords: [...get().keywords, newKw] });
                 if (isCloudStorage()) {
-                    const saved = await getDataProvider().saveKeyword(newKw);
+                    const saved = await getDataProvider().createKeyword(newKw);
                     set({ keywords: get().keywords.map(x => x.id === newKw.id ? saved : x) });
+                    return saved;
+                }
+                return newKw;
+            },
+            addKeywords: async (keywords) => {
+                if (isCloudStorage()) {
+                    const saved = await getDataProvider().createKeywords(keywords);
+                    set({ keywords: [...get().keywords, ...saved] });
+                    return saved;
+                } else {
+                    const now = new Date().toISOString();
+                    const newItems = keywords.map(k => ({
+                        ...k,
+                        id: k.id || crypto.randomUUID(),
+                        createdAt: k.createdAt || now,
+                        updatedAt: now
+                    }));
+                    set({ keywords: [...get().keywords, ...newItems] });
+                    return newItems;
                 }
             },
             updateKeyword: async (id, updated) => {
@@ -166,7 +209,7 @@ export const useAdsStore = create(
                 set({ keywords: get().keywords.map(x => x.id === id ? { ...x, ...updated, updatedAt: now } : x) });
                 if (isCloudStorage()) {
                     const item = get().keywords.find(x => x.id === id);
-                    if (item) await getDataProvider().saveKeyword(item);
+                    if (item) await getDataProvider().updateKeyword(item);
                 }
             },
 
@@ -181,8 +224,27 @@ export const useAdsStore = create(
                 };
                 set({ ads: [...get().ads, newAd] });
                 if (isCloudStorage()) {
-                    const saved = await getDataProvider().saveAd(newAd);
+                    const saved = await getDataProvider().createAd(newAd);
                     set({ ads: get().ads.map(x => x.id === newAd.id ? saved : x) });
+                    return saved;
+                }
+                return newAd;
+            },
+            addAds: async (ads) => {
+                if (isCloudStorage()) {
+                    const saved = await getDataProvider().createAds(ads);
+                    set({ ads: [...get().ads, ...saved] });
+                    return saved;
+                } else {
+                    const now = new Date().toISOString();
+                    const newItems = ads.map(a => ({
+                        ...a,
+                        id: a.id || crypto.randomUUID(),
+                        createdAt: a.createdAt || now,
+                        updatedAt: now
+                    }));
+                    set({ ads: [...get().ads, ...newItems] });
+                    return newItems;
                 }
             },
             updateAd: async (id, updated) => {
@@ -190,7 +252,7 @@ export const useAdsStore = create(
                 set({ ads: get().ads.map(x => x.id === id ? { ...x, ...updated, updatedAt: now } : x) });
                 if (isCloudStorage()) {
                     const item = get().ads.find(x => x.id === id);
-                    if (item) await getDataProvider().saveAd(item);
+                    if (item) await getDataProvider().updateAd(item);
                 }
             },
 
@@ -262,71 +324,101 @@ export const useAdsStore = create(
                     // Skip empty rows
                     if (!row['Campaign'] && !row['Campaign Status']) return;
 
-                    // Normalize Status (Google Ads Editor uses 'Campaign Status', 'Ad Group Status', 'Status')
-                    // We want a unified 'Status' field for our grid
-                    if (row['Campaign Status']) row['Status'] = row['Campaign Status'];
-                    if (row['Ad Group Status']) row['Status'] = row['Ad Group Status'];
+                    // Normalize Status
+                    let status = 'Enabled';
+                    if (row['Campaign Status']) status = row['Campaign Status'];
+                    else if (row['Ad Group Status']) status = row['Ad Group Status'];
+                    else if (row['Status']) status = row['Status'];
 
-                    // 1. Ads (Responsive search ad, etc.)
+                    // Helper to get safely
+                    const getVal = (key) => row[key] ? String(row[key]).trim() : undefined;
+                    const getNum = (key) => row[key] ? Number(row[key]) : undefined;
+
+                    // 1. Ads
                     if (row['Ad type'] && row['Headline 1']) {
-                        ads.push({ id: generateId(), ...row });
+                        ads.push({
+                            id: generateId(),
+                            campaign: getVal('Campaign'),
+                            adGroup: getVal('Ad Group'),
+                            headline1: getVal('Headline 1'),
+                            headline2: getVal('Headline 2'),
+                            headline3: getVal('Headline 3'),
+                            description1: getVal('Description 1'),
+                            description2: getVal('Description 2'),
+                            finalUrl: getVal('Final URL'),
+                            path1: getVal('Path 1'),
+                            path2: getVal('Path 2'),
+                            status: status
+                        });
                         return;
                     }
 
                     // 2. Keywords
                     if (row['Keyword']) {
-                        keywords.push({ id: generateId(), ...row });
+                        keywords.push({
+                            id: generateId(),
+                            campaign: getVal('Campaign'),
+                            adGroup: getVal('Ad Group'),
+                            text: getVal('Keyword'),
+                            matchType: getVal('Criterion Type') || 'Broad',
+                            status: status
+                        });
                         return;
                     }
 
-                    // 3. Ad Groups (Has Ad Group name, but no Keyword/Ad specific fields)
+                    // 3. Ad Groups
                     if (row['Ad Group'] && !row['Keyword'] && !row['Headline 1']) {
-                        // Link to campaignId if possible, but for flat import we just store the name match
-                        // in a real app we'd build a map. For now, flat storage is fine as our selectors use strings or we can strict match.
-                        // Actually, the selectors use 'campaignId' (int). We should probably try to map names to IDs or change selectors to use names.
-                        // Given the Editor CSV format relies on names, switching store to use names for foreign keys might be easier, 
-                        // OR we generate IDs for campaigns and map them here.
-
-                        // Let's generate a temporary ID map for this batch
-                        adGroups.push({ id: generateId(), ...row });
+                        adGroups.push({
+                            id: generateId(),
+                            campaign: getVal('Campaign'),
+                            adGroup: getVal('Ad Group'),
+                            maxCpc: getNum('Max CPC'),
+                            type: getVal('Ad Group Type') || 'Standard',
+                            status: status
+                        });
                         return;
                     }
 
-                    // 4. Campaigns (Has Campaign name, no Ad Group)
+                    // 4. Campaigns
                     if (row['Campaign'] && !row['Ad Group']) {
-                        campaigns.push({ id: generateId(), ...row });
+                        campaigns.push({
+                            id: generateId(),
+                            campaign: getVal('Campaign'),
+                            budget: getNum('Budget'),
+                            type: getVal('Campaign Type') || 'Search',
+                            networks: getVal('Networks'),
+                            languages: getVal('Languages') || 'en',
+                            status: status
+                        });
                         return;
                     }
                 });
 
-                // specific fix for relational ID mapping
-                // We need to ensure 'campaignId' exists on children if we want the "Context Filtering" to work.
-                // The previous simple demo used IDs. The CSV import gives us Names.
-                // We can update the store to index campaigns by Name for easier lookup, or add a 'campaignId' to children during import.
-
+                // Relational Mapping
+                // Map Campaign Name -> ID
                 const campaignMap = {};
-                campaigns.forEach(c => { campaignMap[c['Campaign']] = c.id; });
+                campaigns.forEach(c => { campaignMap[c.campaign] = c.id; });
 
                 adGroups.forEach(ag => {
-                    if (campaignMap[ag['Campaign']]) ag.campaignId = campaignMap[ag['Campaign']];
+                    if (campaignMap[ag.campaign]) ag.campaignId = campaignMap[ag.campaign];
                 });
 
-                // Similarly for Keywords/Ads -> Ad Groups
-                // Ad Groups are not unique by name globally, only per campaign. 
-                // Key = CampaignName + AdGroupName
+                // Map AdGroup Key (Campaign|AdGroup) -> ID
                 const adGroupMap = {};
                 adGroups.forEach(ag => {
-                    adGroupMap[`${ag['Campaign']}|${ag['Ad Group']}`] = ag.id;
+                    adGroupMap[`${ag.campaign}|${ag.adGroup}`] = ag.id;
                 });
 
                 keywords.forEach(kw => {
-                    const key = `${kw['Campaign']}|${kw['Ad Group']}`;
+                    const key = `${kw.campaign}|${kw.adGroup}`;
                     if (adGroupMap[key]) kw.adGroupId = adGroupMap[key];
+                    if (campaignMap[kw.campaign]) kw.campaignId = campaignMap[kw.campaign];
                 });
 
                 ads.forEach(ad => {
-                    const key = `${ad['Campaign']}|${ad['Ad Group']}`;
+                    const key = `${ad.campaign}|${ad.adGroup}`;
                     if (adGroupMap[key]) ad.adGroupId = adGroupMap[key];
+                    if (campaignMap[ad.campaign]) ad.campaignId = campaignMap[ad.campaign];
                 });
 
                 console.log(`Imported: ${campaigns.length} campaigns, ${adGroups.length} ad groups, ${keywords.length} keywords, ${ads.length} ads`);

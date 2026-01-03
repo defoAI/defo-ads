@@ -233,16 +233,18 @@ Return a JSON array of ad groups with fields:
                 const data = parseAiResponse(result);
                 const items = Array.isArray(data) ? data : [data];
 
-                items.forEach((item, idx) => {
-                    store.setAdGroups([...store.adGroups, {
-                        id: Date.now() + idx,
-                        campaignId: selectedCampaign,
-                        'Ad Group': item['Ad Group'] || item.name || `Ad Group ${idx + 1}`,
-                        'Max CPC': item['Max CPC'] || 0.50,
-                        'Campaign': campaign?.Campaign,
-                        Status: item.Status || 'Paused',
-                    }]);
-                });
+                const newItems = items.map((item, idx) => ({
+                    id: Date.now() + idx,
+                    campaignId: selectedCampaign,
+                    'Ad Group': item['Ad Group'] || item.name || `Ad Group ${idx + 1}`,
+                    name: item['Ad Group'] || item.name || `Ad Group ${idx + 1}`,
+                    'Max CPC': item['Max CPC'] || 0.50,
+                    maxCpc: item['Max CPC'] || 0.50,
+                    'Campaign': campaign?.Campaign,
+                    Status: item.Status || 'Paused',
+                    status: (item.Status || 'Paused').toUpperCase()
+                }));
+                await store.addAdGroups(newItems);
             } else if (type === 'keyword') {
                 if (!selectedAdGroup) {
                     throw new Error(t('entity_list.dialog.select_ad_group'));
@@ -268,15 +270,18 @@ Return a JSON array of keywords with fields:
                 const data = parseAiResponse(result);
                 const items = Array.isArray(data) ? data : [data];
 
-                const newKeywords = items.map((item, idx) => ({
+                const newItems = items.map((item, idx) => ({
                     id: Date.now() + idx,
                     adGroupId: selectedAdGroup,
                     Keyword: item.Keyword || item.keyword,
+                    text: item.Keyword || item.keyword,
                     'Criterion Type': item['Criterion Type'] || item.matchType || 'Broad',
+                    matchType: (item['Criterion Type'] || item.matchType || 'Broad').toUpperCase(),
                     'Ad Group': adGroup?.['Ad Group'],
                     Status: item.Status || 'Paused',
+                    status: (item.Status || 'Paused').toUpperCase()
                 }));
-                store.setKeywords([...store.keywords, ...newKeywords]);
+                await store.addKeywords(newItems);
             } else if (type === 'ad') {
                 if (!selectedAdGroup) {
                     throw new Error(t('entity_list.dialog.select_ad_group'));
@@ -295,19 +300,22 @@ Return a JSON array of keywords with fields:
                     }
                 );
                 const data = parseAiResponse(result);
+                const items = Array.isArray(data) ? data : [data];
 
-                store.setAds([...store.ads, {
-                    id: Date.now(),
+                const newItems = items.map((item, idx) => ({
+                    id: Date.now() + idx,
                     adGroupId: selectedAdGroup,
                     'Ad Group': adGroup?.['Ad Group'],
                     'Ad type': 'Responsive search ad',
-                    'Headline 1': data['Headline 1'],
-                    'Headline 2': data['Headline 2'],
-                    'Headline 3': data['Headline 3'],
-                    'Description 1': data['Description 1'],
-                    'Description 2': data['Description 2'],
+                    'Headline 1': item['Headline 1'],
+                    'Headline 2': item['Headline 2'],
+                    'Headline 3': item['Headline 3'],
+                    'Description 1': item['Description 1'],
+                    'Description 2': item['Description 2'],
                     Status: 'Paused',
-                }]);
+                    status: 'PAUSED'
+                }));
+                await store.addAds(newItems);
             }
 
             setAiDialogOpen(false);

@@ -399,7 +399,8 @@
     "seo_keywords_placeholder": "Par exemple, chaussures, mode, soldes d'été",
     "messages": {
       "url_required": "Veuillez d'abord entrer une URL.",
-      "analysis_failed": "Échec de l'analyse par IA. Veuillez réessayer ou remplir manuellement."
+      "analysis_failed": "Échec de l'analyse par IA. Veuillez réessayer ou remplir manuellement.",
+      "duplicate_domain": "Un site avec le domaine \"{{domain}}\" existe déjà. Veuillez utiliser une URL différente."
     },
     "actions": {
       "create": "Charger le site",
@@ -689,5 +690,24 @@
   },
   "sites": {
     "add_first": "Ajoutez votre premier site"
+  },
+  "sync": {
+    "unknown_error": "Erreur inconnue",
+    "idle": "Inactif",
+    "clear_all": "Tout effacer",
+    "processing": "Traitement de {{count}} éléments...",
+    "hours_ago": "Il y a {{hours}}h",
+    "failed_items": "{{count}} échoués",
+    "syncing": "Synchronisation...",
+    "just_now": "À l'instant",
+    "error": "Échec de la synchronisation",
+    "retry_all": "Réessayer tout",
+    "last_sync": "Dernière synchronisation : {{time}}",
+    "pending_count": "{{count}} en attente",
+    "minutes_ago": "Il y a {{minutes}}m",
+    "and_more": "...et {{count}} de plus",
+    "never": "Jamais",
+    "synced": "Tout synchronisé",
+    "status_title": "État de la synchronisation"
   }
 }

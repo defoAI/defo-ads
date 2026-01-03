@@ -423,7 +423,8 @@
         "seo_keywords_placeholder": "e.g. shoes, fashion, summer sale",
         "messages": {
             "url_required": "Please enter a URL first.",
-            "analysis_failed": "AI Analysis failed. Please try again or fill manually."
+            "analysis_failed": "AI Analysis failed. Please try again or fill manually.",
+            "duplicate_domain": "A site with the domain \"{{domain}}\" already exists. Please use a different URL."
         },
         "actions": {
             "create": "Load Site",
@@ -666,5 +667,24 @@
     },
     "placeholder": {
         "description": "This view will display a list of {{type}}. Import a CSV to populate data."
+    },
+    "sync": {
+        "status_title": "Sync Status",
+        "syncing": "Syncing...",
+        "synced": "All synced",
+        "error": "Sync failed",
+        "idle": "Idle",
+        "never": "Never",
+        "just_now": "Just now",
+        "minutes_ago": "{{minutes}}m ago",
+        "hours_ago": "{{hours}}h ago",
+        "pending_count": "{{count}} pending",
+        "last_sync": "Last: {{time}}",
+        "failed_items": "{{count}} failed",
+        "retry_all": "Retry All",
+        "clear_all": "Clear All",
+        "unknown_error": "Unknown error",
+        "and_more": "...and {{count}} more",
+        "processing": "Processing {{count}} items..."
     }
 }

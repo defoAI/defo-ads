@@ -88,6 +88,25 @@ const CreateSiteDialog = ({ open, onClose, onCreateCampaign }) => {
     };
 
     const handleSubmit = () => {
+        // Check for duplicate domain
+        try {
+            const newHostname = new URL(url.trim().startsWith('http') ? url.trim() : `https://${url.trim()}`).hostname.toLowerCase();
+            const existingDuplicate = sites.find(site => {
+                try {
+                    const existingHostname = new URL(site.url.startsWith('http') ? site.url : `https://${site.url}`).hostname.toLowerCase();
+                    return existingHostname === newHostname;
+                } catch {
+                    return false;
+                }
+            });
+            if (existingDuplicate) {
+                setError(t('create_site.messages.duplicate_domain', { domain: newHostname }));
+                return;
+            }
+        } catch {
+            // URL is invalid, let schema validation handle it
+        }
+
         // Basic Validation
         try {
             SiteSchema.parse({

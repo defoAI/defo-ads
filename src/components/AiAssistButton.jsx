@@ -43,8 +43,12 @@ const AiAssistButton = ({
     const [showApiKeyPrompt, setShowApiKeyPrompt] = useState(false);
 
     const askForCustomInstructions = useAdsStore((state) => state.settings?.askForCustomInstructions ?? false);
+    const useServerAI = useAdsStore((state) => state.settings?.useServerAI ?? false);
 
     const checkApiKey = () => {
+        // If Server AI is enabled, we assume the backend handles auth/limits
+        if (useServerAI) return true;
+
         const apiKey = localStorage.getItem('openai_api_key');
         return apiKey && apiKey.trim().length > 0;
     };
