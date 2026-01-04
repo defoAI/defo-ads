@@ -10,7 +10,7 @@ const OPENAI_API_URL = 'https://api.openai.com/v1/chat/completions';
 
 /**
  * @typedef {Object} AIProvider
- * @property {(systemPrompt: string, userPrompt: string) => Promise<string>} generateCompletion
+ * @property {(systemPrompt: string, userPrompt: string, options?: Object) => Promise<string>} generateCompletion
  */
 
 /** @type {AIProvider|null} */
@@ -132,11 +132,11 @@ const defaultOpenAICompletion = async (systemPrompt, userPrompt) => {
  * @param {string} userPrompt - User's prompt
  * @returns {Promise<string>} AI generated response
  */
-export const generateCompletion = async (systemPrompt, userPrompt) => {
+export const generateCompletion = async (systemPrompt, userPrompt, options = {}) => {
     try {
         // Try custom provider first (if registered)
         if (customProvider) {
-            const result = await customProvider.generateCompletion(systemPrompt, userPrompt);
+            const result = await customProvider.generateCompletion(systemPrompt, userPrompt, options);
             if (result !== null && result !== undefined) {
                 return result;
             }
@@ -190,12 +190,12 @@ Focus on the unique value proposition derived from the Site Context if available
  * @param {Object} promptTemplate - The prompt object from store
  * @param {Object} contextData - Key-value pairs for placeholders
  */
-export const generateFromPrompt = async (promptTemplate, contextData) => {
+export const generateFromPrompt = async (promptTemplate, contextData, options = {}) => {
     if (!promptTemplate || !promptTemplate.template) {
         throw new Error('Invalid prompt template');
     }
 
     const content = interpolate(promptTemplate.template, contextData);
 
-    return generateCompletion("You are a helpful AI assistant for Google Ads.", content);
+    return generateCompletion("You are a helpful AI assistant for Google Ads.", content, options);
 };

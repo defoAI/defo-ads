@@ -6,6 +6,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AiContentReview from './AiContentReview';
 import {
 
     Dialog,
@@ -91,6 +92,7 @@ const CreateCampaignDialog = ({ open, onClose }) => {
 
     // Generated data
     const [generatedData, setGeneratedData] = useState(null);
+    const [selectedData, setSelectedData] = useState(null); // Track user selection
     const [generationProgress, setGenerationProgress] = useState('');
 
     const selectedSite = sites.find(s => s.id === siteId);
@@ -206,15 +208,19 @@ Return a JSON object with:
 }`
             };
 
-            const result = await generateFromPrompt(comprehensivePrompt, {});
+            const result = await generateFromPrompt(comprehensivePrompt, {}, { jsonMode: true });
             const data = parseAiResponse(result);
 
-            // Store generated data
+            // Store generated data and initialize selection
             setGeneratedData(data);
+            setSelectedData(data); // Default to all selected
 
             // Set campaign fields
             if (data.campaign) {
-                if (data.campaign.name) setCampaignName(data.campaign.name);
+                // Fallback name if AI returns empty
+                const defaultName = selectedSite ? `Campaign - ${selectedSite.name}` : `New Campaign - ${new Date().toLocaleDateString()}`;
+                setCampaignName(data.campaign.name || defaultName);
+
                 if (data.campaign.budget) setBudget(Number(data.campaign.budget));
                 if (data.campaign.type && ['Search', 'Display', 'Video', 'Shopping', 'Performance Max'].includes(data.campaign.type)) {
                     setCampaignType(data.campaign.type);
@@ -286,12 +292,13 @@ Return a JSON object with:
             const campaignId = createdCampaign.id;
 
             // Add generated ad groups, keywords, ads
-            if (generatedData) {
+            const dataToUse = selectedData || generatedData;
+            if (dataToUse) {
                 const adGroupMap = {}; // Map ad group names to IDs
 
                 // Add Ad Groups
-                if (generatedData.adGroups && Array.isArray(generatedData.adGroups)) {
-                    for (const [index, ag] of generatedData.adGroups.entries()) {
+                if (dataToUse.adGroups && Array.isArray(dataToUse.adGroups)) {
+                    for (const [index, ag] of dataToUse.adGroups.entries()) {
                         // We rely on store to generate ID if we don't, but we need it for children.
                         // So we assume store uses our ID or returns the real one. 
                         // Since we awaited addCampaign, we know chaining works.
@@ -306,21 +313,44 @@ Return a JSON object with:
                             // If local, we can generic. If cloud, we get it back.
                             // To be safe, let store handle ID but we MUST await it.
                             campaignId: campaignId,
-                            name: ag.name,
+                            name: ag.name || `Ad Group ${index + 1}`,
                             maxCpc: cpcValue,
                             type: 'Standard',
                             status: 'ENABLED'
                         };
 
                         const createdGroup = await addAdGroup(newGroupPayload);
-                        adGroupMap[ag.name] = createdGroup.id;
+                        const finalName = newGroupPayload.name;
+
+                        // Map both original name (if present) and final name to ID
+                        if (ag.name) {
+                            adGroupMap[ag.name] = createdGroup.id;
+                        }
+                        adGroupMap[finalName] = createdGroup.id;
+
+                        // Also store by index as safe fallback if AI implies order
+                        adGroupMap[`index_${index}`] = createdGroup.id;
                     }
                 }
 
+                // Helper to find AdGroup ID
+                const findAdGroupId = (targetName) => {
+                    // 1. Direct match
+                    if (adGroupMap[targetName]) return adGroupMap[targetName];
+
+                    // 2. If only one ad group exists, use it (Success fallback)
+                    const adGroupIds = Object.values(adGroupMap);
+                    // unique IDs
+                    const uniqueIds = [...new Set(adGroupIds)];
+                    if (uniqueIds.length === 1) return uniqueIds[0];
+
+                    return null;
+                };
+
                 // Add Keywords
-                if (generatedData.keywords && Array.isArray(generatedData.keywords)) {
-                    for (const kw of generatedData.keywords) {
-                        const adGroupId = adGroupMap[kw.adGroup];
+                if (dataToUse.keywords && Array.isArray(dataToUse.keywords)) {
+                    for (const kw of dataToUse.keywords) {
+                        const adGroupId = findAdGroupId(kw.adGroup);
                         if (adGroupId) {
                             const matchType = kw.matchType || 'Broad';
                             const matchTypeUpper = matchType.toUpperCase();
@@ -337,9 +367,9 @@ Return a JSON object with:
                 }
 
                 // Add Ads
-                if (generatedData.ads && Array.isArray(generatedData.ads)) {
-                    for (const ad of generatedData.ads) {
-                        const adGroupId = adGroupMap[ad.adGroup];
+                if (dataToUse.ads && Array.isArray(dataToUse.ads)) {
+                    for (const ad of dataToUse.ads) {
+                        const adGroupId = findAdGroupId(ad.adGroup);
                         if (adGroupId) {
                             await addAd({
                                 adGroupId: adGroupId,
@@ -426,6 +456,7 @@ Return a JSON object with:
                                     value={siteId}
                                     label={t('create_campaign.select_site.title')}
                                     onChange={(e) => setSiteId(e.target.value)}
+                                    data-testid="select-site"
                                 >
                                     {sites.map((site) => (
                                         <MenuItem key={site.id} value={site.id}>
@@ -477,6 +508,7 @@ Return a JSON object with:
                             onChange={(e) => setCampaignGoal(e.target.value)}
                             placeholder={t('create_campaign.campaign_goals.goals_placeholder')}
                             sx={{ mb: 3 }}
+                            data-testid="input-campaign-goals"
                         />
 
                         {/* Language Selection */}
@@ -656,14 +688,15 @@ Return a JSON object with:
 
                         {/* Summary of what will be created */}
                         {generatedData && (
-                            <Alert severity="success" icon={<AiIcon />} sx={{ mt: 2 }}>
-                                <Typography variant="subtitle2">{t('create_campaign.review.ai_generated')}</Typography>
-                                <Typography variant="body2">
-                                    {t('create_campaign.review.ad_groups_count', { count: generatedData.adGroups?.length || 0 })}, {' '}
-                                    {t('create_campaign.review.keywords_count', { count: generatedData.keywords?.length || 0 })}, {' '}
-                                    {t('create_campaign.review.ads_count', { count: generatedData.ads?.length || 0 })}
+                            <Box sx={{ mt: 3 }}>
+                                <Typography variant="subtitle2" gutterBottom>
+                                    {t('create_campaign.review.review_content', 'Review Generated Content')}
                                 </Typography>
-                            </Alert>
+                                <AiContentReview
+                                    generatedData={generatedData}
+                                    onSelectionChange={setSelectedData}
+                                />
+                            </Box>
                         )}
                     </Box>
                 );
@@ -749,12 +782,14 @@ Return a JSON object with:
                         label={t('common.generate')} // Or specific label
                         variant="contained"
                         placeholder="Additional instructions (optional)..."
+                        dataTestId="btn-ai-generate-trigger"
                     />
                 ) : activeStep < 2 ? (
                     <Button
                         onClick={handleNext}
                         variant="contained"
                         disabled={(activeStep === 0 && !siteId) || isGenerating}
+                        data-testid="btn-next"
                     >
                         {t('create_campaign.actions.next')}
                     </Button>

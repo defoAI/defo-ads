@@ -34,7 +34,8 @@ const AiAssistButton = ({
     variant = "contained",
     fullWidth = false,
     size = "medium",
-    placeholder = "e.g., Focus on eco-friendly aspects..."
+    placeholder = "e.g., Focus on eco-friendly aspects...",
+    dataTestId
 }) => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -92,6 +93,7 @@ const AiAssistButton = ({
                 disabled={disabled || isGenerating}
                 fullWidth={fullWidth}
                 size={size}
+                data-testid={dataTestId}
                 sx={variant === 'contained' ? {
                     background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                     color: 'white',

@@ -220,6 +220,7 @@ const CreateSiteDialog = ({ open, onClose, onCreateCampaign }) => {
                                 size="large"
                                 fullWidth
                                 onClick={handleCreateCampaignClick}
+                                data-testid="btn-create-campaign-success"
                                 sx={{
                                     py: 1.5,
                                     borderRadius: 2,
@@ -236,6 +237,7 @@ const CreateSiteDialog = ({ open, onClose, onCreateCampaign }) => {
                                 size="large"
                                 fullWidth
                                 onClick={handleClose}
+                                data-testid="btn-create-site-done"
                             >
                                 {t('common.done', 'Done')}
                             </Button>
@@ -307,6 +309,7 @@ const CreateSiteDialog = ({ open, onClose, onCreateCampaign }) => {
                             multiline
                             rows={3}
                             sx={{ mb: 2 }}
+                            data-testid="input-site-desc"
                         />
 
                         {/* SEO Keywords */}
