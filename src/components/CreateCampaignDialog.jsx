@@ -799,6 +799,7 @@ Return a JSON object with:
                         variant="contained"
                         size="large"
                         data-testid="btn-create-campaign"
+                        disabled={isGenerating}
                         sx={{
                             px: 4,
                             py: 1.5,
@@ -809,7 +810,7 @@ Return a JSON object with:
                             },
                         }}
                     >
-                        {t('create_campaign.actions.create')}
+                        {isGenerating ? t('common.creating') : t('create_campaign.actions.create')}
                     </Button>
                 )}
             </DialogActions>
